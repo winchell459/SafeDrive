@@ -10,6 +10,9 @@ public class DashHandler : MonoBehaviour
     public Animator LeftIndicator, RightIndicator;
     public AudioClip HornClip;
     public AudioSource PlayerCameraSource;
+    public RawImage HandbrakeSymbol;
+    public Transform SteeringWheelImage;
+    public GameObject LowBeams, HighBeams; //press button off -> on -> high -> off  ||  off -> on -> high -> one -> off
 
     //public string[] Indicators = { "left", "right" };
     public enum Indicator
@@ -20,7 +23,9 @@ public class DashHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetHandbrake(false);
+        LowBeams.SetActive(false);
+        HighBeams.SetActive(false);
     }
 
     // Update is called once per frame
@@ -28,7 +33,67 @@ public class DashHandler : MonoBehaviour
     {
         DisplaySpeed();
         HandleHorn();
+        handleLights();
     }
+
+    private void FixedUpdate()
+    {
+        //Debug.Log(Driver.GetSteeringAngle());
+        handleSteeringWheel();
+    }
+
+
+    private void handleLights()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if(LowBeams.activeSelf || HighBeams.activeSelf)
+            {
+                HighBeams.SetActive(false);
+                LowBeams.SetActive(false);
+            }
+            else
+            {
+                LowBeams.SetActive(true);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if(LowBeams.activeSelf)
+            {
+                LowBeams.SetActive(false);
+                HighBeams.SetActive(true);
+            }else if (HighBeams.activeSelf)
+            {
+                LowBeams.SetActive(true);
+                HighBeams.SetActive(false);
+            }
+        }
+    }
+
+    public bool HighBeamsOn() { return HighBeams.activeSelf; }
+    public bool LowBeamsOn() { return LowBeams.activeSelf; }
+
+    private void handleSteeringWheel()
+    {
+        if(Driver.GetVehicleSpeed() > 0 )
+        {
+            float angle = Driver.GetSteeringAngle();
+            Vector3 currentAngles = SteeringWheelImage.localEulerAngles;
+
+            SteeringWheelImage.localEulerAngles = new Vector3(currentAngles.x, currentAngles.y, -angle);
+        }
+        else if(GetHandbrake())
+        {
+            float h = Input.GetAxis("Horizontal");
+            //finish parked wheel angle
+            //float angle = Mathf.Clamp(angle, -25, 25);
+        }
+        
+
+    }
+
 
     bool honking = false;
     private void HandleHorn()
@@ -40,6 +105,15 @@ public class DashHandler : MonoBehaviour
             PlayerCameraSource.Play();
         }
         else if(Input.GetAxis("Honk") < 0.1f) honking = false;
+    }
+
+    public bool GetHandbrake()
+    {
+        return HandbrakeSymbol.gameObject.activeSelf;
+    }
+    public void SetHandbrake(bool active)
+    {
+        HandbrakeSymbol.gameObject.SetActive(active);
     }
 
     private void DisplaySpeed()
@@ -96,5 +170,14 @@ public class DashHandler : MonoBehaviour
             
             SetIndicator(Indicator.left, false);
         }
+    }
+
+    public float GetSpeed()
+    {
+        return Driver.GetVehicleSpeed();
+    }
+    public float GetWheelAngle()
+    {
+        return SteeringWheelImage.localEulerAngles.z;
     }
 }
