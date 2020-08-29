@@ -7,12 +7,15 @@ public class DashHandler : MonoBehaviour
 {
     public DriverHandler Driver;
     public Text SpeedometerText;
+    public Text ClockText;
     public Animator LeftIndicator, RightIndicator;
     public AudioClip HornClip;
     public AudioSource PlayerCameraSource;
     public RawImage HandbrakeSymbol;
     public Transform SteeringWheelImage;
     public GameObject LowBeams, HighBeams; //press button off -> on -> high -> off  ||  off -> on -> high -> one -> off
+
+    private TimeManager tm;
 
     //public string[] Indicators = { "left", "right" };
     public enum Indicator
@@ -26,6 +29,7 @@ public class DashHandler : MonoBehaviour
         SetHandbrake(false);
         LowBeams.SetActive(false);
         HighBeams.SetActive(false);
+        tm = FindObjectOfType<TimeManager>();
     }
 
     // Update is called once per frame
@@ -34,6 +38,7 @@ public class DashHandler : MonoBehaviour
         DisplaySpeed();
         HandleHorn();
         handleLights();
+        handleClock();
     }
 
     private void FixedUpdate()
@@ -42,6 +47,23 @@ public class DashHandler : MonoBehaviour
         handleSteeringWheel();
     }
 
+    private void handleClock()
+    {
+        float time = tm.CurrentTime;
+        //hh:mm:ss
+        int hours = (int)(time / 3600);
+        time -= hours * 3600;
+        int minutes = (int)(time / 60);
+        time -= minutes * 60;
+        string clock = "";
+        if (hours < 10) clock += "0";
+        clock += hours;
+        clock += ":";
+        if (minutes < 10) clock += "0";
+        clock += minutes;
+        ClockText.text = clock;
+
+    }
 
     private void handleLights()
     {
@@ -74,10 +96,10 @@ public class DashHandler : MonoBehaviour
 
     public bool HighBeamsOn() { return HighBeams.activeSelf; }
     public bool LowBeamsOn() { return LowBeams.activeSelf; }
-
+    public float rotationRate = 5;
     private void handleSteeringWheel()
     {
-        if(Driver.GetVehicleSpeed() > 0 )
+        if(!GetHandbrake() && Driver.GetVehicleSpeed() > 0 )
         {
             float angle = Driver.GetSteeringAngle();
             Vector3 currentAngles = SteeringWheelImage.localEulerAngles;
@@ -86,12 +108,22 @@ public class DashHandler : MonoBehaviour
         }
         else if(GetHandbrake())
         {
+            //Debug.Log("Parking Brake On");
             float h = Input.GetAxis("Horizontal");
+            
             //finish parked wheel angle
-            //float angle = Mathf.Clamp(angle, -25, 25);
+            Vector3 currentAngles = SteeringWheelImage.localEulerAngles;
+            float angle = currentAngles.z - h * rotationRate * Time.deltaTime;
+            //-25 > angle < 25
+            //-180 > angle < 180
+            if (angle < -180) angle += 360;
+            else if (angle > 180) angle -= 360;
+            Debug.Log(angle);
+            angle = Mathf.Clamp(angle, -25, 25);
+            SteeringWheelImage.localEulerAngles = new Vector3(currentAngles.x, currentAngles.y, angle);
         }
         
-
+        
     }
 
 
