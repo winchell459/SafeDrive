@@ -96,6 +96,7 @@ public class DashHandler : MonoBehaviour
 
     public bool HighBeamsOn() { return HighBeams.activeSelf; }
     public bool LowBeamsOn() { return LowBeams.activeSelf; }
+
     public float rotationRate = 5;
     private void handleSteeringWheel()
     {
