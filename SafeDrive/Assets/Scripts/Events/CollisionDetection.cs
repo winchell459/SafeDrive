@@ -4,20 +4,49 @@ using UnityEngine;
 
 public class CollisionDetection : EventScript
 {
+    public static bool CollisionCompleted;
+    public static bool CollisionPass;
+    public override bool Pass
+    {
+        get => CollisionPass;
+        set { CollisionPass = value; _pass = value; }
+    }
+    public override bool Completed {
+        get => CollisionCompleted;
+        set { CollisionCompleted = value; _completed = value; }
+    }
+
+    public string[] AvoidTags = { "Building",  "Pedestrian", "Curb", "Obsticle", "Vehicle"};
+    //public List<string> AvoidTagsList = new List<string>();
+
     public override void Initialize()
     {
-        throw new System.NotImplementedException();
+        Pass = true;
+        Completed = false;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        foreach (string tag in AvoidTags) {
+            if (collision.gameObject.CompareTag(tag))
+            {
+                Pass = false;
+                Completed = true;
+            }
+         }
+
+        Debug.Log(collision.gameObject.name);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        foreach (string tag in AvoidTags)
+        {
+            if (other.gameObject.CompareTag(tag))
+            {
+                Pass = false;
+                Completed = true;
+            }
+        }
     }
 }

@@ -37,7 +37,7 @@ public class TimeManager : MonoBehaviour
             float h0 = BrighestExposure - DarkestExposure;
             float h1 = DarkestExposure + l1 * h0 / l0;
             //RenderSettings.skybox.shader.exp
-            Debug.Log(h1);
+            //Debug.Log(h1);
             RenderSettings.skybox.SetFloat("_Exposure", h1);
 
             float hr0 = BrighestTint.r - DarkestTint.r;
@@ -70,7 +70,7 @@ public class TimeManager : MonoBehaviour
             float hr1 = Mathf.Clamp(DarkestTint.r + l1 * hr0 / l0, 0, 1);
             float hg1 = Mathf.Clamp(DarkestTint.g + l1 * hg0 / l0, 0, 1);
             float hb1 = Mathf.Clamp(DarkestTint.b + l1 * hb0 / l0, 0, 1);
-            Debug.Log("red: " + hr1);
+            //Debug.Log("red: " + hr1);
             RenderSettings.skybox.SetColor("_Tint", new Color(hr1, hg1, hb1));
 
             float hl0 = MaxIntensity - MinIntensity;
