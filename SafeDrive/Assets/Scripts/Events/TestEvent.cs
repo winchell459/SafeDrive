@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class TestEvent : MonoBehaviour
 {
-    public CollisionDetection cd;
+    public EventScript[] events;
     // Start is called before the first frame update
     void Start()
     {
-        cd.Initialize();
+        events = GetComponents<EventScript>();
     }
 
     // Update is called once per frame

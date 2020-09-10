@@ -119,7 +119,7 @@ public class DashHandler : MonoBehaviour
             //-180 > angle < 180
             if (angle < -180) angle += 360;
             else if (angle > 180) angle -= 360;
-            Debug.Log(angle);
+            //Debug.Log(angle);
             angle = Mathf.Clamp(angle, -25, 25);
             SteeringWheelImage.localEulerAngles = new Vector3(currentAngles.x, currentAngles.y, angle);
         }
@@ -211,6 +211,8 @@ public class DashHandler : MonoBehaviour
     }
     public float GetWheelAngle()
     {
-        return SteeringWheelImage.localEulerAngles.z;
+        float angle = SteeringWheelImage.localEulerAngles.z;
+        if (angle > 180) angle -= 360;
+        return angle;
     }
 }
