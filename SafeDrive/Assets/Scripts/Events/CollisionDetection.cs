@@ -19,6 +19,10 @@ public class CollisionDetection : EventScript
     public string[] AvoidTags = { "Building",  "Pedestrian", "Curb", "Obsticle", "Vehicle"};
     //public List<string> AvoidTagsList = new List<string>();
 
+    private void Awake()
+    {
+        EventType = EventTypes.Collision;
+    }
     public override void Initialize()
     {
         Pass = true;

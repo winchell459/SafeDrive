@@ -7,6 +7,10 @@ public class AreaDetection : EventScript
     private bool initialized;
     public string otherTag = "Player";
     public bool EnterPass = true;
+    private void Awake()
+    {
+        EventType = EventTypes.Area;
+    }
     public override void Initialize()
     {
         initialized = true;

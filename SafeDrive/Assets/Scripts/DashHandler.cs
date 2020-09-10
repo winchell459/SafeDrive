@@ -16,6 +16,7 @@ public class DashHandler : MonoBehaviour
     public GameObject LowBeams, HighBeams; //press button off -> on -> high -> off  ||  off -> on -> high -> one -> off
 
     private TimeManager tm;
+    public GameObject IgnitionButton;
 
     //public string[] Indicators = { "left", "right" };
     public enum Indicator
@@ -39,12 +40,20 @@ public class DashHandler : MonoBehaviour
         HandleHorn();
         handleLights();
         handleClock();
+
+        handleEngineToggle();
     }
 
     private void FixedUpdate()
     {
         //Debug.Log(Driver.GetSteeringAngle());
         handleSteeringWheel();
+    }
+
+    private void handleEngineToggle()
+    {
+        //add velocity check
+        if (Input.GetKeyDown(KeyCode.I) && Driver.GetVehicleSpeed() < 0.1f) ToggleEngine();
     }
 
     private void handleClock()
@@ -214,5 +223,17 @@ public class DashHandler : MonoBehaviour
         float angle = SteeringWheelImage.localEulerAngles.z;
         if (angle > 180) angle -= 360;
         return angle;
+    }
+
+    public void ToggleEngine()
+    {
+        if (Driver.ToggleEngine())
+        {
+            IgnitionButton.transform.GetChild(0).GetComponent<Text>().text = "Engine On";
+        }
+        else
+        {
+            IgnitionButton.transform.GetChild(0).GetComponent<Text>().text = "Engine Off";
+        }
     }
 }

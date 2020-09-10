@@ -22,6 +22,7 @@ public class DriverHandler : MonoBehaviour
     private void Update()
     {
         HandleDriverInput();
+        
     }
 
     bool handbrakeDown = false;
@@ -45,6 +46,29 @@ public class DriverHandler : MonoBehaviour
         }else if(handbrakeDown && Input.GetAxis("Jump") < 0.1f) {
             
             handbrakeDown = false;
+        }
+    }
+
+    public bool ToggleEngine()
+    {
+        if (Controller.enabled)
+        {
+            Debug.Log("Toggle off");
+            Controller.enabled = false;
+            foreach(AudioSource AS in Controller.GetComponents<AudioSource>())
+            {
+                AS.enabled = false;
+            }
+            return false;
+        }
+        else
+        {
+            Controller.enabled = true;
+            foreach (AudioSource AS in Controller.GetComponents<AudioSource>())
+            {
+                AS.enabled = true;
+            }
+            return true;
         }
     }
 }

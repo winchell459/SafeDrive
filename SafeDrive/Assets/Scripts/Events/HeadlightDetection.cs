@@ -19,6 +19,10 @@ public class HeadlightDetection : EventScript
 
     private bool initialized = false;
 
+    private void Awake()
+    {
+        EventType = EventTypes.Headlight;
+    }
     public override void Initialize()
     {
         Dash = FindObjectOfType<DashHandler>();

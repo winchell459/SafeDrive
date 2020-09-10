@@ -16,10 +16,14 @@ public class TurnWheelDetection : EventScript
 
     public override bool Pass { get => CheckWheelAngle(); set => base.Completed = value; }
 
+    private void Awake()
+    {
+        EventType = EventTypes.Wheel;
+    }
     public override void Initialize()
     {
         car = FindObjectOfType<CarUserControl>().transform;
-        Completed = true;
+        //Completed = true;
     }
 
     private bool CheckWheelAngle()
@@ -33,6 +37,7 @@ public class TurnWheelDetection : EventScript
             if (FindObjectOfType<DashHandler>().GetWheelAngle() > WheelAngleThreshold)
             {
                 pass = true;
+                Completed = true;
             }
         }
         else //car is pointed downhill
@@ -40,6 +45,7 @@ public class TurnWheelDetection : EventScript
             if (FindObjectOfType<DashHandler>().GetWheelAngle() < -WheelAngleThreshold)
             {
                 pass = true;
+                Completed = true;
             }
         }
         

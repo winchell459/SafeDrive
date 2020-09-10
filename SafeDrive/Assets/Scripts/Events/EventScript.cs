@@ -17,4 +17,20 @@ public abstract class EventScript : MonoBehaviour
     }
 
     public abstract void Initialize();
+    // abstract void 
+
+    public enum EventTypes
+    {
+        Area,
+        Headlight,
+        Brake,
+        Velocity,
+        Collision,
+        Wheel,
+        HeadTurn
+    }
+
+    public EventTypes EventType;
+    
+    public float Weight = 0;
 }

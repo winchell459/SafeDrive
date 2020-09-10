@@ -7,6 +7,10 @@ public class HeadTurnDetection : EventScript
     public float TurnHeadThreshold = 15;
     private CamController head;
 
+    private void Awake()
+    {
+        EventType = EventTypes.HeadTurn;
+    }
     public override void Initialize()
     { 
         head = FindObjectOfType<CamController>();

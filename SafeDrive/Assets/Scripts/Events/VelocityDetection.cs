@@ -12,6 +12,10 @@ public class VelocityDetection : EventScript
     private bool timedStarted;
     //public override bool Pass { get { return Dash.GetSpeed(); } set {; } }
 
+    private void Awake()
+    {
+        EventType = EventTypes.Velocity;
+    }
     public override void Initialize()
     {
         Dash = FindObjectOfType<DashHandler>();
