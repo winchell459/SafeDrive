@@ -31,9 +31,11 @@ public class TurnWheelDetection : EventScript
         bool pass = false;
 
         float angle = car.localEulerAngles.x;
+        Debug.Log("Car Angle: " + angle);
         if (angle > 180) angle -= 360;
         if(angle < 0) //car is pointed uphill
         {
+            Debug.Log(FindObjectOfType<DashHandler>().GetWheelAngle());
             if (FindObjectOfType<DashHandler>().GetWheelAngle() > WheelAngleThreshold)
             {
                 pass = true;
@@ -42,21 +44,16 @@ public class TurnWheelDetection : EventScript
         }
         else //car is pointed downhill
         {
+            Debug.Log(FindObjectOfType<DashHandler>().GetWheelAngle());
             if (FindObjectOfType<DashHandler>().GetWheelAngle() < -WheelAngleThreshold)
             {
                 pass = true;
                 Completed = true;
             }
         }
-        
+        Pass = pass;
         return pass;
     }
 
-    //private void Update()
-    //{
-    //    if (!car) Initialize();
-
-    //    Debug.Log(car.localEulerAngles.x);
-       
-    //}
+    
 }

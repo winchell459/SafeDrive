@@ -6,7 +6,7 @@ public class AreaDetection : EventScript
 {
     private bool initialized;
     public string otherTag = "Player";
-    public bool EnterPass = true;
+    public bool EnterPass = true; //
     private void Awake()
     {
         EventType = EventTypes.Area;
@@ -15,6 +15,7 @@ public class AreaDetection : EventScript
     {
         initialized = true;
         Pass = true;
+        //if (EnterPass) Completed = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,9 +27,10 @@ public class AreaDetection : EventScript
                 Pass = false;
                 Completed = true;
             }
-            else if(!Completed && EnterPass)
+            else if (/*!Completed &&*/ EnterPass)
             {
                 Pass = true;
+                Completed = true;
             }
         }
     }
@@ -37,9 +39,10 @@ public class AreaDetection : EventScript
     {
         if(other.CompareTag(otherTag) && initialized)
         {
-            if(!Completed && EnterPass)
+            if (/*!Completed &&*/ EnterPass)
             {
                 Pass = false;
+                Completed = false;
             }
         }
     }

@@ -71,4 +71,9 @@ public class DriverHandler : MonoBehaviour
             return true;
         }
     }
+
+    public bool EngineState()
+    {
+        return Controller.enabled;
+    }
 }

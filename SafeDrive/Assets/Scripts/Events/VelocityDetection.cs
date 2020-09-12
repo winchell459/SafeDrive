@@ -28,7 +28,7 @@ public class VelocityDetection : EventScript
         {
             if (!timedStarted )
             {
-                if(Dash.GetSpeed() > TargetVelocity - 0.01f && Dash.GetSpeed() < TargetVelocity + 0.01f)
+                if(Dash.GetSpeed() > TargetVelocity - 0.1f && Dash.GetSpeed() < TargetVelocity + 0.1f)
                 {
                     timedStarted = true;
                     timeLimitStart = Time.fixedTime;
@@ -37,7 +37,8 @@ public class VelocityDetection : EventScript
 
             if (timedStarted)
             {
-                if (Dash.GetSpeed() > TargetVelocity - 0.01f && Dash.GetSpeed() < TargetVelocity + 0.01f)
+                //Debug.Log(Dash.GetSpeed());
+                if (Dash.GetSpeed() > TargetVelocity - 0.1f && Dash.GetSpeed() < TargetVelocity + 0.1f)
                 {
                     if(TimeLimit + timeLimitStart < Time.fixedTime)
                     {

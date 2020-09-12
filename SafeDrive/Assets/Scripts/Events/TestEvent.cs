@@ -8,11 +8,15 @@ public class TestEvent : MonoBehaviour
     public CollisionDetection carCollisionEvent;
     private AreaDetection areaDetector;
     public bool Initialized = false;
+    public bool CheckEngine = false;
+
+    public float score;
+    private bool eventsInitialized = false;
     // Start is called before the first frame update
     void Start()
     {
         setupEvents();
-
+        if (areaDetector) areaDetector.Initialize();
     }
 
     // Update is called once per frame
@@ -22,21 +26,68 @@ public class TestEvent : MonoBehaviour
         {
             if (areaDetector)
             {
-
-            }
-            else
-            {
-                bool complete = true;
-                bool pass = true;
-                foreach(EventScript myEvent in events)
+                if(areaDetector.Completed && areaDetector.Pass)
                 {
-                    if(myEvent.Completed)
+                    if(!eventsInitialized)
                     {
-
+                        foreach (EventScript myEvent in events)
+                        {
+                            if(myEvent.EventType != EventScript.EventTypes.Area) myEvent.Initialize();
+                        }
+                        eventsInitialized = true;
+                    }
+                    if (isEventComplete() || (CheckEngine && !FindObjectOfType<DriverHandler>().EngineState()))
+                    {
+                        score = scoreEvent();
+                        Initialized = false;
                     }
                 }
             }
+            else
+            {
+                if (!eventsInitialized)
+                {
+                    foreach (EventScript myEvent in events)
+                    {
+                        if (myEvent.EventType != EventScript.EventTypes.Area) myEvent.Initialize();
+                    }
+                    eventsInitialized = true;
+                }
+                if (isEventComplete() || (CheckEngine && !GetComponent<DriverHandler>().EngineState()))
+                {
+
+                    score = scoreEvent();
+                    Initialized = false;
+                }
+            }
         }
+    }
+
+    private bool isEventComplete()
+    {
+        bool complete = true;
+        foreach (EventScript myEvent in events)
+        {
+            if (!myEvent.Completed) complete = false;
+        }
+        return complete;
+    }
+
+    private float scoreEvent()
+    {
+        float score = 0;
+        float total = 0;
+        foreach (EventScript myEvent in events)
+        {
+            if (myEvent.Pass)
+            {
+                score += myEvent.Weight;
+                Debug.Log(myEvent.EventType + " Passed");
+            }
+
+            total += myEvent.Weight;
+        }
+        return score / total;
     }
 
     private void setupEvents()
