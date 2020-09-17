@@ -5,16 +5,19 @@ using UnityEngine;
 public class TestEvent : MonoBehaviour
 {
     public EventScript[] events;
+    public TestEvent NextEvent, PrevEvent;
     public CollisionDetection carCollisionEvent;
     private AreaDetection areaDetector;
     public bool Initialized = false;
-    public bool CheckEngine = false;
+    public bool CheckEngineOn = false;
+    public bool EventCompleted = false;
 
     public float score;
     private bool eventsInitialized = false;
     // Start is called before the first frame update
     void Start()
     {
+        
         setupEvents();
         if (areaDetector) areaDetector.Initialize();
     }
@@ -22,8 +25,13 @@ public class TestEvent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Initialized)
+        if (Initialized && !EventCompleted)
         {
+            if(carCollisionEvent.Completed && !carCollisionEvent.Pass) //then we failed all tests
+            {
+                EventCompleted = true;
+                score = 0;
+            }
             if (areaDetector)
             {
                 if(areaDetector.Completed && areaDetector.Pass)
@@ -35,11 +43,16 @@ public class TestEvent : MonoBehaviour
                             if(myEvent.EventType != EventScript.EventTypes.Area) myEvent.Initialize();
                         }
                         eventsInitialized = true;
+                        if (NextEvent)
+                        {
+                            NextEvent.Initialized = true;
+                            NextEvent.PrevEvent = this;
+                        }
                     }
-                    if (isEventComplete() || (CheckEngine && !FindObjectOfType<DriverHandler>().EngineState()))
+                    if (isEventComplete() || (CheckEngineOn && !FindObjectOfType<DriverHandler>().EngineState()))
                     {
                         score = scoreEvent();
-                        Initialized = false;
+                        EventCompleted = true;
                     }
                 }
             }
@@ -53,11 +66,11 @@ public class TestEvent : MonoBehaviour
                     }
                     eventsInitialized = true;
                 }
-                if (isEventComplete() || (CheckEngine && !GetComponent<DriverHandler>().EngineState()))
+                if (isEventComplete() || (CheckEngineOn && !GetComponent<DriverHandler>().EngineState()))
                 {
 
                     score = scoreEvent();
-                    Initialized = false;
+                    EventCompleted = true;
                 }
             }
         }
@@ -87,6 +100,21 @@ public class TestEvent : MonoBehaviour
 
             total += myEvent.Weight;
         }
+        TestEvent prevEvent = PrevEvent;
+        while (prevEvent)
+        {
+            foreach (EventScript myEvent in prevEvent.events)
+            {
+                if (myEvent.Pass)
+                {
+                    score += myEvent.Weight;
+                    Debug.Log(myEvent.EventType + " Passed");
+                }
+
+                total += myEvent.Weight;
+            }
+            prevEvent = prevEvent.PrevEvent;
+        }
         return score / total;
     }
 
@@ -94,16 +122,21 @@ public class TestEvent : MonoBehaviour
     {
         events = GetComponents<EventScript>();
         carCollisionEvent = GameObject.FindGameObjectWithTag("Player").GetComponent<CollisionDetection>();
-        EventScript[] newEvents = new EventScript[events.Length + 1];
+        //EventScript[] newEvents = new EventScript[events.Length + 1];
 
-        int i = 0;
+        //int i = 0;
         foreach (EventScript myEvent in events)//foreach(DataType variableName in Array/List)
         {
-            newEvents[i] = myEvent;
-            i += 1;
+            //newEvents[i] = myEvent;
+            //i += 1;
             if (myEvent.EventType == EventScript.EventTypes.Area) areaDetector = (AreaDetection)myEvent;
         }
-        newEvents[i] = carCollisionEvent;
-        events = newEvents;
+        //newEvents[i] = carCollisionEvent;
+        //events = newEvents;
+    }
+
+    public void SetEvents(EventScript[] events)
+    {
+        this.events = events;
     }
 }

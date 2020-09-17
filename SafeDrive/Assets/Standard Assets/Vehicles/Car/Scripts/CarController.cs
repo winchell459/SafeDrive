@@ -197,6 +197,21 @@ namespace UnityStandardAssets.Vehicles.Car
         private void ApplyDrive(float accel, float footbrake)
         {
 
+            for (int i = 0; i < 4; i++)
+            {
+
+                m_WheelColliders[i].brakeTorque = m_BrakeTorque * footbrake;
+
+            }
+
+            if(footbrake > 0 && Vector3.Angle(transform.forward, m_Rigidbody.velocity) > 180)
+            {
+                accel += 0.1f;
+            }else if (footbrake > 0  && Vector3.Angle(transform.forward, m_Rigidbody.velocity) < 180)
+            {
+                accel -= 0.1f;
+            }
+
             float thrustTorque;
             switch (m_CarDriveType)
             {
@@ -220,27 +235,7 @@ namespace UnityStandardAssets.Vehicles.Car
 
             }
 
-            for (int i = 0; i < 4; i++)
-            {
-                //if (m_Rigidbody.velocity.z <= 0)
-                //{
-                    
-                //    break; //continue;
-                //}
-                if (/*CurrentSpeed > 5 && */ Vector3.Angle(transform.forward, m_Rigidbody.velocity) < 50f)
-                {
-                    m_WheelColliders[i].brakeTorque = m_BrakeTorque*footbrake;
-                }
-                else if (footbrake > 0)
-                {
-                    m_WheelColliders[i].brakeTorque = 0f;
-                    //m_WheelColliders[i].motorTorque = -m_ReverseTorque * footbrake;
-                }
-
-                
-
-                
-            }
+            
         }
 
 

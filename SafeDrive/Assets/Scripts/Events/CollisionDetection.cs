@@ -39,7 +39,7 @@ public class CollisionDetection : EventScript
             }
          }
 
-        Debug.Log(collision.gameObject.name);
+        //Debug.Log(collision.gameObject.name);
     }
 
     private void OnTriggerEnter(Collider other)

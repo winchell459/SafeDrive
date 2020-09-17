@@ -27,7 +27,8 @@ public abstract class EventScript : MonoBehaviour
         Velocity,
         Collision,
         Wheel,
-        HeadTurn
+        HeadTurn,
+        Blinker
     }
 
     public EventTypes EventType;
