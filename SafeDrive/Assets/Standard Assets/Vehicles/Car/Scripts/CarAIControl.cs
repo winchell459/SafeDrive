@@ -65,7 +65,7 @@ namespace UnityStandardAssets.Vehicles.Car
             {
                 // Car should not be moving,
                 // use handbrake to stop
-                m_CarController.Move(0, 0, -1f, 1f);
+                m_CarController.Move(0, 0, 0, -1f, 1f);
             }
             else
             {
@@ -153,6 +153,7 @@ namespace UnityStandardAssets.Vehicles.Car
 
                 // decide the actual amount of accel/brake input to achieve desired speed.
                 float accel = Mathf.Clamp((desiredSpeed - m_CarController.CurrentSpeed)*accelBrakeSensitivity, -1, 1);
+                float reverse = Mathf.Clamp((desiredSpeed - m_CarController.CurrentSpeed) * accelBrakeSensitivity, -1, 1);
 
                 // add acceleration 'wander', which also prevents AI from seeming too uniform and robotic in their driving
                 // i.e. increasing the accel wander amount can introduce jostling and bumps between AI cars in a race
@@ -169,7 +170,7 @@ namespace UnityStandardAssets.Vehicles.Car
                 float steer = Mathf.Clamp(targetAngle*m_SteerSensitivity, -1, 1)*Mathf.Sign(m_CarController.CurrentSpeed);
 
                 // feed input to the car controller.
-                m_CarController.Move(steer, accel, accel, 0f);
+                m_CarController.Move(steer, accel, reverse, accel, 0f);
 
                 // if appropriate, stop driving when we're close enough to the target.
                 if (m_StopWhenTargetReached && localTarget.magnitude < m_ReachTargetThreshold)

@@ -127,7 +127,7 @@ namespace UnityStandardAssets.Vehicles.Car
         }
 
 
-        public void Move(float steering, float accel, float footbrake, float handbrake)
+        public void Move(float steering, float accel, float reverse, float footbrake, float handbrake)
         {
             for (int i = 0; i < 4; i++)
             {
@@ -140,7 +140,8 @@ namespace UnityStandardAssets.Vehicles.Car
 
             //clamp input values
             steering = Mathf.Clamp(steering, -1, 1);
-            AccelInput = accel = Mathf.Clamp(accel, 0, 1);
+            AccelInput = accel = Mathf.Clamp(accel, -1, 1);
+            reverse = Mathf.Clamp(reverse, -1, 0);
             BrakeInput = footbrake = -1*Mathf.Clamp(footbrake, -1, 0);
             handbrake = Mathf.Clamp(handbrake, 0, 1);
 
@@ -151,7 +152,7 @@ namespace UnityStandardAssets.Vehicles.Car
             m_WheelColliders[1].steerAngle = m_SteerAngle;
 
             SteerHelper();
-            ApplyDrive(accel, footbrake);
+            ApplyDrive(accel, reverse, footbrake);
             CapSpeed();
 
             //Set the handbrake.
@@ -194,7 +195,7 @@ namespace UnityStandardAssets.Vehicles.Car
         }
 
 
-        private void ApplyDrive(float accel, float footbrake)
+        private void ApplyDrive(float accel, float reverse, float footbrake)
         {
 
             float thrustTorque;
@@ -222,15 +223,17 @@ namespace UnityStandardAssets.Vehicles.Car
 
             for (int i = 0; i < 4; i++)
             {
-                if (CurrentSpeed > 5 && Vector3.Angle(transform.forward, m_Rigidbody.velocity) < 50f)
-                {
-                    m_WheelColliders[i].brakeTorque = m_BrakeTorque*footbrake;
-                }
-                else if (footbrake > 0)
-                {
-                    m_WheelColliders[i].brakeTorque = 0f;
-                    m_WheelColliders[i].motorTorque = -m_ReverseTorque*footbrake;
-                }
+                //if (m_Rigidbody.velocity.z <= 0) break; //continue;
+                //if (/*CurrentSpeed > 5 &&*/ Vector3.Angle(transform.forward, m_Rigidbody.velocity) < 50f)
+                // {
+                //     m_WheelColliders[i].brakeTorque = m_BrakeTorque*footbrake;
+                // }
+                // else //if (footbrake > 0)
+                // {
+                //    m_WheelColliders[i].brakeTorque = 0f;
+                //  m_WheelColliders[i].motorTorque = -m_ReverseTorque*footbrake;
+                //}
+                m_WheelColliders[i].brakeTorque = m_BrakeTorque * footbrake;
             }
         }
 
@@ -266,7 +269,7 @@ namespace UnityStandardAssets.Vehicles.Car
 
         // checks if the wheels are spinning and is so does three things
         // 1) emits particles
-        // 2) plays tiure skidding sounds
+        // 2) plays tire skidding sounds
         // 3) leaves skidmarks on the ground
         // these effects are controlled through the WheelEffects class
         private void CheckForWheelSpin()
