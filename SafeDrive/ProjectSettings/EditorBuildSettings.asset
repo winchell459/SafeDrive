@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/winchell_terrain.unity
+    guid: 42fb792f807c74b42a410e92123ccdd8
   m_configObjects: {}

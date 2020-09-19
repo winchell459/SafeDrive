@@ -6,6 +6,7 @@ public class TestEvent : MonoBehaviour
 {
     public EventScript[] events;
     public TestEvent NextEvent, PrevEvent;
+    
     public CollisionDetection carCollisionEvent;
     private AreaDetection areaDetector;
     public bool Initialized = false;
