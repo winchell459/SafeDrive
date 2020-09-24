@@ -101,8 +101,9 @@ public class TestEvent : MonoBehaviour
             }
             total += myEvent.Weight;
         }
-        return score / total;
+ 
         TestEvent prevEvent = PrevEvent;
+
         while (prevEvent)
         {
             foreach (EventScript myEvent in prevEvent.events)
@@ -116,6 +117,7 @@ public class TestEvent : MonoBehaviour
             }
             prevEvent = prevEvent.PrevEvent;
         }
+        return score / total;
     }
 
     private void setupEvents()  //purpose to add carCollisionEvent to list of events
