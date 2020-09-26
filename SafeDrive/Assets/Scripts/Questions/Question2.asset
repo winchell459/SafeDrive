@@ -15,8 +15,8 @@ MonoBehaviour:
   MyQuestion: What should you do when parking downhill with a curb?
   Description: 
   Answers:
-  - 
-  - Set the handbrake after parking and turn front wheels toward the curb
-  - 
-  - 
+  - Turn front wheels away from the right curb
+  - Turn front wheels toward the right curb
+  - "Don\u2019t rotate the front wheels and leave as is\t"
+  - Place a rock under the rear tire to keep your car from rolling down the hill
   Answer: 1

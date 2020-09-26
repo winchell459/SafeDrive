@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff9d8e721d3c6d8498ed2a9caf2e5fec, type: 3}
   m_Name: Question1
   m_EditorClassIdentifier: 
-  MyQuestion: What should you do when preparing to turn right?
-  Description: 
+  MyQuestion: What should you not do when making a right turn at an intersection?
+  Description: A brief explanation for what the player will be doing in the game
   Answers:
-  - Stop, look left, look right, turn on right blinker
-  - 
-  - 
-  - 
+  - Changing lanes when turning
+  - Come to a complete stop
+  - Look both ways for pedestrians/traffic
+  - Turn on right blinker before turning
   Answer: 0

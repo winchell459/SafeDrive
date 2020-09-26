@@ -15,8 +15,9 @@ MonoBehaviour:
   MyQuestion: When should you turn the headlights on or off?
   Description: 
   Answers:
-  - 
-  - 
-  - 
-  - 
+  - Must turn off high beams within 150 meters of an oncoming vehicle.
+  - Low beams must be activated half-hour before the sun sets until half-hour after
+    the sun rises.
+  - During adverse weather effects or low visibility, turning on lights is required.
+  - All of the above
   Answer: 3

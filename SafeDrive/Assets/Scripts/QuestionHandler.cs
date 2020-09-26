@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class QuestionHandler : MonoBehaviour
 {
     public GameObject QuestionUI;
-    public Text QuestionText, DescriptionText, AnswerText;
-    public Questions CurrentQuestion;
+    //public Text QuestionText, DescriptionText, AnswerText;
+    public Question CurrentQuestion;
+    public Question[] Questions;
 
     // Start is called before the first frame update
     void Start()
@@ -17,14 +18,14 @@ public class QuestionHandler : MonoBehaviour
 
     public void DisplayQuestion()
     {
-        QuestionText.text = CurrentQuestion.MyQuestion;
-        DescriptionText.text = CurrentQuestion.Description;
-        string answers = " ";
-        foreach (string answer in CurrentQuestion.Answers)
-        {
-            answers += answer + "\n";
-        }
-        AnswerText.text = answers;
-        QuestionUI.SetActive(true);
+        QuestionUI.GetComponent<QuestionCanvas>().DisplayQuestion(CurrentQuestion, this);
+    }
+
+    public void InputAnswer(int answer)
+    {
+        Debug.Log(answer == CurrentQuestion.Answer ? "Correct" : "Incorrect");
+
+        //string response == answer == CurrentQuestion.Answer ? "Correct" : "Incorrect");
+
     }
 }
