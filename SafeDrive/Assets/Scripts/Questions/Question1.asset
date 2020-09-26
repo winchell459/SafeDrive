@@ -12,16 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f23a98f15d2b8e49ae76145aedd90e8, type: 3}
   m_Name: Question1
   m_EditorClassIdentifier: 
-  MyQuestion: 'blah fsjlksajdfoiasj fasklfgjh asfjhs fgafsaklfgj askl fasf fs sjklasjf
-    asf jsaklfjsaklrf '
+  MyQuestion: What should you not do when making a right turn at an intersection?
   Description: jsfkl sajfkasj faskljfksaljf klsa sfkj saklj ffjsk jsskjsklfdj slkf
     jlkafjaslkfasj klasjfsdajf skldjf fjsd lksjklfajskldjkl fh jklfklfdjfklj kjfskljskl
     jslkfjlksj skljsdfkljs ;js;jskljfdkljsdk jfsjfsdklj fsd;ljkfsd;lfd;fjsd; sdfjkfsdjklf
     sdk; fsdkljfs  klj  klfsd jkl fjj lkfsdjlkfsd jfsdl k jfslkj fsdlkjf
   Answers:
-  - This is the answer to the question and is answer 1. I don't know the answer.
-  - This is the answer to the question and is answer 2. I don't know the answer.
-  - This is the answer to the question and is answer 3. I don't know the answer.
-  - This is the answer to the question and is answer 4. I don't know the answer.
-  - This is the answer to the question and is answer 5. I don't know the answer.
-  Answer: 3
+  - "Changing lanes when turning\r"
+  - Come to a complete stop before turning
+  - Look both ways for pedestrians and other vehicles
+  - Turn on right blinker before turning
+  Answer: 0
