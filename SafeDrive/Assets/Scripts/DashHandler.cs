@@ -53,7 +53,7 @@ public class DashHandler : MonoBehaviour
     private void handleEngineToggle()
     {
         //add velocity check
-        if (Input.GetKeyDown(KeyCode.I) && Driver.GetVehicleSpeed() < 0.1f) ToggleEngine();
+        if (Input.GetKeyDown(KeyCode.I)) ToggleEngine();
     }
 
     private void handleClock()
@@ -227,13 +227,19 @@ public class DashHandler : MonoBehaviour
 
     public void ToggleEngine()
     {
-        if (Driver.ToggleEngine())
+        //if (Driver.GetVehicleSpeed() >= 0.1f) return;
+
+        if (Driver.GetVehicleSpeed() < 0.1f)
         {
-            IgnitionButton.transform.GetChild(0).GetComponent<Text>().text = "Engine On";
+            if (Driver.ToggleEngine())
+            {
+                IgnitionButton.transform.GetChild(0).GetComponent<Text>().text = "Engine On";
+            }
+            else
+            {
+                IgnitionButton.transform.GetChild(0).GetComponent<Text>().text = "Engine Off";
+            }
         }
-        else
-        {
-            IgnitionButton.transform.GetChild(0).GetComponent<Text>().text = "Engine Off";
-        }
+            
     }
 }

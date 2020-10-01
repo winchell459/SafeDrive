@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class SystemHandler : MonoBehaviour
@@ -17,6 +18,18 @@ public class SystemHandler : MonoBehaviour
     private void Update()
     {
         handleMenu();
+        handleMainMenu();
+    }
+
+    private void handleMainMenu()
+    {
+        if(SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                SceneManager.LoadScene(1);
+            }
+        }
     }
 
     private void handleMenu()
