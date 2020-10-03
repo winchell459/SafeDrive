@@ -11,15 +11,22 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     void Update()
     {
-        yaw += YawSpeed * Input.GetAxis("Mouse X");
-        yaw = Mathf.Clamp(yaw, -MaxTurn, MaxTurn);
-        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, yaw, transform.localEulerAngles.z);
-
+        if (Input.GetMouseButton(1))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            yaw += YawSpeed * Input.GetAxis("Mouse X");
+            yaw = Mathf.Clamp(yaw, -MaxTurn, MaxTurn);
+            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, yaw, transform.localEulerAngles.z);
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 }

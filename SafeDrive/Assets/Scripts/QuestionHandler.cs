@@ -16,7 +16,7 @@ public class QuestionHandler : MonoBehaviour
         DisplayQuestion();
     }
 
-    public void DisplayQuestion()
+    public void DisplayQuestion() //displays question number from QuestionCanvas
     {
         QuestionUI.GetComponent<QuestionCanvas>().DisplayQuestion(CurrentQuestion, this);
     }
