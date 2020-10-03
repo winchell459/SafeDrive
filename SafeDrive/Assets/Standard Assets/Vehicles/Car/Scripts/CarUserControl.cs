@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+//using Control;
 
 namespace UnityStandardAssets.Vehicles.Car
 {
@@ -9,7 +10,8 @@ namespace UnityStandardAssets.Vehicles.Car
     {
         private CarController m_Car; // the car controller we want to use
         public bool HandbrakeSet = false;
-
+        //public Control.MasterControl MC;
+        
         private void Awake()
         {
             // get the car controller

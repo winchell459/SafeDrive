@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SystemHandler : MonoBehaviour
 {
+    public Control.MasterControl MC;
     private void Awake()
     {
         if(FindObjectOfType<SystemHandler>() && FindObjectOfType<SystemHandler>() != this)
@@ -27,7 +28,7 @@ public class SystemHandler : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                SceneManager.LoadScene(1);
+                MC.StartUnits();
             }
         }
     }

@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: f5c12f217a474414b8b15a5a5411a8ec
   - enabled: 1
+    path: Assets/Scenes/Parking_00.unity
+    guid: 869502c2dcf634bb1b0f75085ccab606
+  - enabled: 0
     path: Assets/Scenes/winchell_terrain.unity
     guid: 42fb792f807c74b42a410e92123ccdd8
   m_configObjects: {}

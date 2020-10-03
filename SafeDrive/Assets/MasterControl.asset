@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d18dc62c706e0450c89807a2342840fe, type: 3}
+  m_Name: MasterControl
+  m_EditorClassIdentifier: 
+  Units:
+  - Name: Unit_00
+    SequenceScenes:
+    - SceneName: Parking_00
+      MySequence: 0
+      Pause: 0
+  - Name: Unit_01
+    SequenceScenes:
+    - SceneName: 
+      MySequence: 0
+      Pause: 0
+    - SceneName: 
+      MySequence: 0
+      Pause: 0
+    - SceneName: 
+      MySequence: 0
+      Pause: 0
+  - Name: Unit_??
+    SequenceScenes: []
+  - Name: Unit_??
+    SequenceScenes: []
+  CurrentState: 0
