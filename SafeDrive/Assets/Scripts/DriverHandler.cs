@@ -7,6 +7,7 @@ public class DriverHandler : MonoBehaviour
     public UnityStandardAssets.Vehicles.Car.CarController Vehicle;
     public UnityStandardAssets.Vehicles.Car.CarUserControl Controller;
     public DashHandler Dash;
+    public MasterControl MC;
 
     public float GetVehicleSpeed()
     {
@@ -19,8 +20,11 @@ public class DriverHandler : MonoBehaviour
         return Vehicle.CurrentSteerAngle;
     }
 
+    
+
     private void Update()
     {
+        Controller.ControlsPaused = MC.Paused;
         HandleDriverInput();
         
     }

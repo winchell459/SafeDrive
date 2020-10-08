@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
-//using Control;
+
 
 namespace UnityStandardAssets.Vehicles.Car
 {
@@ -10,7 +10,8 @@ namespace UnityStandardAssets.Vehicles.Car
     {
         private CarController m_Car; // the car controller we want to use
         public bool HandbrakeSet = false;
-        //public Control.MasterControl MC;
+        public bool ControlsPaused;
+        
         
         private void Awake()
         {
@@ -25,6 +26,12 @@ namespace UnityStandardAssets.Vehicles.Car
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             float v = CrossPlatformInputManager.GetAxis("Vertical");
             float b = Input.GetKey(KeyCode.B)? -1: 0;
+            if (ControlsPaused)
+            {
+                h = 0;
+                v = 0;
+                b = -1;
+            }
 #if !MOBILE_INPUT
             //float handbrake = CrossPlatformInputManager.GetAxis("Jump");
             float handbrake = 0;

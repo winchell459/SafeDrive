@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SystemHandler : MonoBehaviour
 {
-    public Control.MasterControl MC;
+    public MasterControl MC;
     private void Awake()
     {
         if(FindObjectOfType<SystemHandler>() && FindObjectOfType<SystemHandler>() != this)

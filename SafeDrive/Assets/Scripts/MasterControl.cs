@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-namespace Control
-{
+
     [CreateAssetMenu(fileName = "MasterControl", menuName = "ScriptableObjects/MasterControl")]
     public class MasterControl : ScriptableObject
     {
@@ -13,7 +12,7 @@ namespace Control
 
         private int unitIndex = 0;
 
-        public enum UnitSequence
+        public enum UnitStages
         {
             Start,
             PretestPrompt,
@@ -24,18 +23,18 @@ namespace Control
             PracticalTest,
             Score
         }
-        public UnitSequence CurrentState = UnitSequence.Start;
+        public UnitStages CurrentStage = UnitStages.Start;
 
         public bool Paused
         {
-            get { return Units[unitIndex].GetPaused(CurrentState); }
+            get { return Units[unitIndex].GetPaused(CurrentStage); }
             //set { }
         }
 
         public void StartUnits()
         {
             unitIndex = 0;
-            CurrentState = 0;
+            CurrentStage = 0;
             SceneManager.LoadScene(Units[0].GetScene(0));
         }
 
@@ -49,19 +48,19 @@ namespace Control
             }
         }
 
-        public void NextSequence()
+        public void NextStage()
         {
-            if (CurrentState < UnitSequence.Score)
+            if (CurrentStage < UnitStages.Score)
             {
-                CurrentState += 1;
-                if (Units[unitIndex].GetScene(CurrentState) != SceneManager.GetActiveScene().name)
+                CurrentStage += 1;
+                if (Units[unitIndex].GetScene(CurrentStage) != SceneManager.GetActiveScene().name)
                 {
-                    SceneManager.LoadScene(Units[unitIndex].GetScene(CurrentState));
+                    SceneManager.LoadScene(Units[unitIndex].GetScene(CurrentStage));
                 }
             }
             else
             {
-                CurrentState = 0;
+                CurrentStage = 0;
                 StartNextUnit();
             }
         }
@@ -71,15 +70,15 @@ namespace Control
     public class Units
     {
         public string Name = "Unit_??";
-        public SequenceScene[] SequenceScenes;
+        public StageScene[] StageScenes;
 
 
-        public string GetScene(MasterControl.UnitSequence targetSequence)
+        public string GetScene(MasterControl.UnitStages targetStage)
         {
-            string scene = SequenceScenes[0].SceneName;
-            foreach (SequenceScene sequence in SequenceScenes)
+            string scene = StageScenes[0].SceneName;
+            foreach (StageScene stage in StageScenes)
             {
-                if (sequence.MySequence <= targetSequence) scene = sequence.SceneName;
+                if (stage.MyStage <= targetStage) scene = stage.SceneName;
 
 
             }
@@ -87,24 +86,24 @@ namespace Control
             return scene;
         }
 
-        public bool GetPaused(MasterControl.UnitSequence sequence)
+        public bool GetPaused(MasterControl.UnitStages stage)
         {
-            bool paused = false;
-            foreach (SequenceScene sequenceScene in SequenceScenes)
+            bool paused = true;
+            foreach (StageScene stageScene in StageScenes)
             {
-                if (sequenceScene.MySequence == sequence)
-                    paused = sequenceScene.Pause;
+                if (stageScene.MyStage == stage)
+                    paused = stageScene.Pause;
             }
             return paused;
         }
     }
 
     [System.Serializable]
-    public class SequenceScene
+    public class StageScene
     {
         public string SceneName;
-        public MasterControl.UnitSequence MySequence;
+        public MasterControl.UnitStages MyStage;
         public bool Pause;
     }
-}
+
 

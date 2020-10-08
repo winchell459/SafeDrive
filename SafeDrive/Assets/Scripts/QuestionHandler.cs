@@ -13,7 +13,7 @@ public class QuestionHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DisplayQuestion();
+        //DisplayQuestion();
     }
 
     public void DisplayQuestion()
