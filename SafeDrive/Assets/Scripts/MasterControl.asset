@@ -14,11 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Units:
   - Name: Units_00
-    SequenceScenes: []
+    StageScenes:
+    - SceneName: Parking_00
+      MyStage: 0
+      Pause: 0
+    - SceneName: Parking_00
+      MyStage: 2
+      Pause: 0
+    - SceneName: Parking_00
+      MyStage: 6
+      Pause: 0
   - Name: Units_??
-    SequenceScenes: []
+    StageScenes:
+    - SceneName: 
+      MyStage: 0
+      Pause: 0
+    - SceneName: 
+      MyStage: 0
+      Pause: 0
   - Name: Units_??
-    SequenceScenes: []
+    StageScenes: []
   - Name: Units_??
-    SequenceScenes: []
-  CurrentState: 0
+    StageScenes: []
+  CurrentStage: 0

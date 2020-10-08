@@ -9,7 +9,7 @@ namespace UnityStandardAssets.Vehicles.Car
     {
         private CarController m_Car; // the car controller we want to use
         public bool HandbrakeSet = false;
-        
+        public bool ControlsPaused = true;
 
         private void Awake()
         {
@@ -25,6 +25,12 @@ namespace UnityStandardAssets.Vehicles.Car
             float v = CrossPlatformInputManager.GetAxis("Vertical");
             float s = Input.GetKey(KeyCode.B) ? -1 : 0;
             float b = Input.GetKey(KeyCode.B) ? -1 : 0;
+            if (ControlsPaused)
+            {
+                h = 0;
+                v = 0;
+                b = -1;
+            }
 #if !MOBILE_INPUT
             //float handbrake = CrossPlatformInputManager.GetAxis("Jump");
             float handbrake = 0;

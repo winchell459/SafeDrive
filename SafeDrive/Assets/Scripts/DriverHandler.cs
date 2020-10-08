@@ -7,6 +7,7 @@ public class DriverHandler : MonoBehaviour
     public UnityStandardAssets.Vehicles.Car.CarController Vehicle;
     public UnityStandardAssets.Vehicles.Car.CarUserControl Controller;
     public DashHandler Dash;
+    public MasterControl MC;
 
     public float GetVehicleSpeed()
     {
@@ -20,9 +21,12 @@ public class DriverHandler : MonoBehaviour
 
     private void Update()
     {
+        Controller.ControlsPaused = MC.Paused;
         HandleDriverInput();
     }
+
     bool handbrakeDown = false;
+
     private void HandleDriverInput()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
