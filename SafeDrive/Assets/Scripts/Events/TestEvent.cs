@@ -13,8 +13,18 @@ public class TestEvent : MonoBehaviour
     public bool CheckEngineOn = false;
     public bool EventCompleted = false;
 
-    public float score;
+    
     private bool eventsInitialized = false;
+
+    public ScoreCard score;
+    public struct ScoreCard
+    {
+        public int Total;
+        public int Score;
+        public string Labels;
+        public string Values;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +41,10 @@ public class TestEvent : MonoBehaviour
             if(carCollisionEvent.Completed && !carCollisionEvent.Pass) //then we failed all tests
             {
                 EventCompleted = true;
-                score = 0;
+                score.Total = 0;
+                score.Labels = "Collision Avoided \n\n Event Failed!";
+                score.Values = "False";
+
             }
             if (areaDetector)
             {
@@ -87,16 +100,31 @@ public class TestEvent : MonoBehaviour
         return complete;
     }
 
-    private float scoreEvent()
+    private ScoreCard scoreEvent()
     {
+        ScoreCard card = new ScoreCard();
+        card.Labels = "Collision Avoided \n\n";
+        card.Values = "True \n\n";
         float score = 0;
         float total = 0;
         foreach (EventScript myEvent in events)
         {
+
             if (myEvent.Pass)
             {
                 score += myEvent.Weight;
                 Debug.Log(myEvent.EventType + " Passed");
+            }
+
+            if(myEvent.Weight > 0)
+            {
+                card.Labels += myEvent.Label + "\n";
+                card.Values += (myEvent.Pass ? myEvent.Weight.ToString() : "0") + "/"+ myEvent.Weight.ToString() + "\n"; // 60/60 or 0/60
+            }
+            else if(myEvent.IncludeInScoreCard)
+            {
+                card.Labels += myEvent.Label + "\n";
+                card.Values += myEvent.Pass.ToString() + "\n";
             }
 
             total += myEvent.Weight;
@@ -112,11 +140,24 @@ public class TestEvent : MonoBehaviour
                     Debug.Log(myEvent.EventType + " Passed");
                 }
 
+                if (myEvent.Weight > 0)
+                {
+                    card.Labels += myEvent.Label + "\n";
+                    card.Values += (myEvent.Pass ? myEvent.Weight.ToString() : "0") + "/" + myEvent.Weight.ToString() + "\n"; // 60/60 or 0/60
+                }
+                else if (myEvent.IncludeInScoreCard)
+                {
+                    card.Labels += myEvent.Label + "\n";
+                    card.Values += myEvent.Pass.ToString() + "\n";
+                }
+
                 total += myEvent.Weight;
             }
             prevEvent = prevEvent.PrevEvent;
         }
-        return score / total;
+        card.Score = (int)score;
+        card.Total = (int)total;
+        return card;
     }
 
     private void setupEvents()

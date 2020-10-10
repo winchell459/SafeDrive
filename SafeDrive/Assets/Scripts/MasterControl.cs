@@ -64,7 +64,12 @@ using UnityEngine.SceneManagement;
                 StartNextUnit();
             }
         }
+
+    public void ReloadCurrentStage()
+    {
+        SceneManager.LoadScene(Units[unitIndex].GetScene(CurrentStage));
     }
+}
 
     [System.Serializable]
     public class Units
