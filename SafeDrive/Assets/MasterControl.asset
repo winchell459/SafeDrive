@@ -22,12 +22,16 @@ MonoBehaviour:
       MyStage: 5
       Pause: 0
     - SceneName: Parking_00
-      MyStage: 7
-      Pause: 1
+      MyStage: 6
+      Pause: 0
+    PassingScore: 0.7
   - Name: Unit_01
     StageScenes: []
+    PassingScore: 0.7
   - Name: Unit_??
     StageScenes: []
+    PassingScore: 0.7
   - Name: Unit_??
     StageScenes: []
-  CurrentStage: 0
+    PassingScore: 0.7
+  CurrentStage: 2

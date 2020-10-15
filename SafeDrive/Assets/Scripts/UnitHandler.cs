@@ -9,7 +9,8 @@ public class UnitHandler : MonoBehaviour
     public GameObject StartPromptPanel, PretestPromptPanel, ScorePanel;
     public QuestionHandler UnitQuestion;
     public TestEvent Pretest, PracticalTest;
-    
+
+    public Marker PretestMarkers, PracticalMarkers;
     
 
     // Update is called once per frame
@@ -17,6 +18,7 @@ public class UnitHandler : MonoBehaviour
     {
         if (MC.CurrentStage == MasterControl.UnitStages.Start)
         {
+
             if (!StartPromptPanel.activeSelf) StartPromptPanel.SetActive(true);
             if (Input.GetMouseButtonDown(0))
             {
@@ -30,6 +32,7 @@ public class UnitHandler : MonoBehaviour
         else if (MC.CurrentStage == MasterControl.UnitStages.Pretest)
         {
             if (PretestPromptPanel.activeSelf) PretestPromptPanel.SetActive(false);
+            if (!PretestMarkers.MarkerActive) PretestMarkers.MarkerActive = true;
             if (Pretest.EventCompleted)
             {
                 MC.NextStage();
@@ -48,19 +51,27 @@ public class UnitHandler : MonoBehaviour
         else if (MC.CurrentStage == MasterControl.UnitStages.Question)
         {
             if (ScorePanel.activeSelf) ScorePanel.SetActive(false);
-            if (UnitQuestion.QuestionUI.activeSelf == false) UnitQuestion.DisplayQuestion();
+            if(!UnitQuestion.QuestionActive) UnitQuestion.DisplayQuestion();
         }
         else if (MC.CurrentStage == MasterControl.UnitStages.QuestionScore)
         {
-
+            if (UnitQuestion.QuestionActive) UnitQuestion.HideQuestion();
+            MC.NextStage();
         }
         else if (MC.CurrentStage == MasterControl.UnitStages.PracticalTest)
         {
-
+            if (!PracticalMarkers.MarkerActive) PracticalMarkers.MarkerActive = true;
+            if (PracticalTest.EventCompleted) MC.NextStage();
         }
         else if (MC.CurrentStage == MasterControl.UnitStages.Score)
         {
-
+            if (!ScorePanel.activeSelf)
+            {
+                ScorePanel.SetActive(true);
+                TestEvent.ScoreCard card = PracticalTest.score;
+                bool passed = card.Score /card.Total >= MC.PassingScore;
+                ScorePanel.GetComponent<ScorePanelHandler>().DisplayScore(card, true, passed);
+            }
         }
 
 
