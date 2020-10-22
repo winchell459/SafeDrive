@@ -8,21 +8,35 @@ public class AICar : MonoBehaviour
     public Transform[] Waypoints;
     private int waypointIndex = 0;
     private Vector3 direction;
-    private UnityStandardAssets.Vehicles.Car.CarController car;
+    private GameObject player;
     public GameObject FrontLeftWheel, FrontRightWheel;
     float angle;
+    public GameObject HighBeams; //lights with flare
+    public GameObject LowBeams;
+    public float DistanceToPlayer = 65;
+
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<NavMeshAgent>().SetDestination(Waypoints[waypointIndex].position);
+        //GetComponent<NavMeshAgent>().SetDestination(Waypoints[waypointIndex].position);
         direction = transform.forward;
-        car = GetComponent<UnityStandardAssets.Vehicles.Car.CarController>();
+        player = FindObjectOfType<UnityStandardAssets.Vehicles.Car.CarController>().gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Vector3.Distance(Waypoints[waypointIndex].position, transform.position) < 1)
+        //handles turning highbeams off if in range of player
+        if(LowBeams.activeSelf && Vector3.Distance(player.transform.position, transform.position) < DistanceToPlayer)
+        {
+            HighBeams.SetActive(false);
+        }
+        else if(LowBeams.activeSelf)
+        {
+            HighBeams.SetActive(true);
+        }
+
+        if (Vector3.Distance(Waypoints[waypointIndex].position, transform.position) < 1)
         {
             GetComponent<NavMeshAgent>().speed = Waypoints[waypointIndex].GetComponent<AIMarker>().Speed;
 
@@ -39,5 +53,33 @@ public class AICar : MonoBehaviour
         //car.Move(90 / angle, 0, 0, 0, 0);
         //Debug.Log(waypointIndex); still a problem (runtime error)
         direction = transform.forward;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            MovementPause(true);
+            
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            MovementPause(false);
+        }
+    }
+
+    public void MovementPause(bool pause)
+    {
+        if (pause)
+        {
+            GetComponent<NavMeshAgent>().SetDestination(transform.position);
+        }
+        else
+        {
+            GetComponent<NavMeshAgent>().SetDestination(Waypoints[waypointIndex].position);
+        }
     }
 }

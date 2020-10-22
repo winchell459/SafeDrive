@@ -43,4 +43,4 @@ MonoBehaviour:
   - Name: Units_??
     StageScenes: []
     PassingScore: 0.7
-  CurrentStage: 2
+  CurrentStage: 8

@@ -29,7 +29,7 @@ public class UnitHandler : MonoBehaviour  //UnitHandler accesses the MasterContr
         else if (MC.CurrentStage == MasterControl.UnitStages.Pretest)
         {
             if (PretestPromptPanel.activeSelf) PretestPromptPanel.SetActive(false);
-            if (!PretestMarkers.MarkerActive) PretestMarkers.MarkerActive = true;
+            if (PretestMarkers && !PretestMarkers.MarkerActive) PretestMarkers.MarkerActive = true;
             if(Pretest.EventCompleted)
             {
                 MC.NextStage();
@@ -57,7 +57,7 @@ public class UnitHandler : MonoBehaviour  //UnitHandler accesses the MasterContr
         }
         else if (MC.CurrentStage == MasterControl.UnitStages.PracticalTest)
         {
-            if (!PracticalMarkers.MarkerActive) PracticalMarkers.MarkerActive = true;
+            if (PracticalMarkers && !PracticalMarkers.MarkerActive) PracticalMarkers.MarkerActive = true;
             if (PracticalTest.EventCompleted) MC.NextStage();
         }
         else if (MC.CurrentStage == MasterControl.UnitStages.Score)

@@ -18,7 +18,8 @@ public class MasterControl : ScriptableObject
         Question,
         QuestionScore,
         PracticalTest,
-        Score
+        Score,
+        Debug
     }
     public UnitStages CurrentStage = UnitStages.Start;
 
@@ -54,7 +55,7 @@ public class MasterControl : ScriptableObject
                 SceneManager.LoadScene(Units[unitIndex].GetScene(CurrentStage));
             }
         }
-        else
+        else if (CurrentStage != UnitStages.Debug)
         {
             CurrentStage = 0;
             StartNextUnit();
@@ -86,6 +87,7 @@ public class Units
     public bool GetPaused(MasterControl.UnitStages stage)
     {
         bool paused = true;
+        if (stage == MasterControl.UnitStages.Debug) return false;
         foreach(StageScene stageScene in StageScenes)
         {
             if (stageScene.MyStage == stage)
