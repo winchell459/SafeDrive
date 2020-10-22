@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Parking_00.unity
+- path: Assets/Scenes/TempGameMap.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

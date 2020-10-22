@@ -22,6 +22,7 @@ public class MasterControl : ScriptableObject
     }
     public UnitStages CurrentStage = UnitStages.Start;
 
+    public float PassingScore { get { return Units[unitIndex].PassingScore; } }
     public bool Paused
     {
         get { return Units[unitIndex].GetPaused(CurrentStage); }
@@ -59,6 +60,10 @@ public class MasterControl : ScriptableObject
             StartNextUnit();
         }
     }
+    public void ReloadCurrentStage()
+    {
+        SceneManager.LoadScene(Units[unitIndex].GetScene(CurrentStage));
+    }
 }
 
 [System.Serializable]
@@ -66,6 +71,7 @@ public class Units
 {
     public string Name = "Units_??"; //changes default name Element ?? to Name
     public StageScene[] StageScenes;
+    public float PassingScore = 0.7f;
 
     public string GetScene(MasterControl.UnitStages targetSequence)
     {
@@ -79,7 +85,7 @@ public class Units
     }
     public bool GetPaused(MasterControl.UnitStages stage)
     {
-        bool paused = false;
+        bool paused = true;
         foreach(StageScene stageScene in StageScenes)
         {
             if (stageScene.MyStage == stage)

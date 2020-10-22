@@ -5,6 +5,8 @@ using UnityEngine;
 
 public abstract class EventScript : MonoBehaviour
 {
+    public string Label = "Event has not been labeled";
+    public bool IncludeInScoreCard = false;
     public virtual bool Pass { 
         get {return _pass; } 
         set { _pass = value; } 
@@ -29,6 +31,7 @@ public abstract class EventScript : MonoBehaviour
         HeadTurn,
         Blinker
     }
+
     public EventTypes EventType;
     public float Weight = 0;
 }

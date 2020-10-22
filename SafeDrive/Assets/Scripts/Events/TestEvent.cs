@@ -12,15 +12,24 @@ public class TestEvent : MonoBehaviour
     public bool CheckEngine = false;
     public bool EventCompleted = false;
 
-    public float score;
     private bool eventsInitialized = false;
+
+    public ScoreCard score;
+    public struct ScoreCard
+    {
+        public int Total;
+        public int Score;
+        public string Labels;
+        public string Values;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         setupEvents();
         if (areaDetector) areaDetector.Initialize();
     }
-
+                                                                                        
     // Update is called once per frame
     //Used to control sequence of events (initiates events in a certain order, activates or deactivates events)
     void Update()
@@ -30,7 +39,9 @@ public class TestEvent : MonoBehaviour
             if (carCollisionEvent.Completed && !carCollisionEvent.Pass) //then fail all tests
             {
                 EventCompleted = true;
-                score = 0;
+                score.Total = 0;
+                score.Labels = "Avoided Collisions \n\n Event Failed!";
+                score.Values = "False";
             }
             if (areaDetector)
             {
@@ -88,16 +99,31 @@ public class TestEvent : MonoBehaviour
         }
         return complete;
     }
-    private float scoreEvent()
+    private ScoreCard scoreEvent()
     {
+        ScoreCard card = new ScoreCard();
+        card.Labels = "Avoided Collsions \n\n";
+        card.Values = "True \n\n";
         float score = 0;
         float total = 0;
         foreach (EventScript myEvent in events)
         {
+
             if (myEvent.Pass)
             {
                 score += myEvent.Weight;
            
+            }
+
+            if(myEvent.Weight > 0)
+            {
+                card.Labels += myEvent.Label + "\n";
+                card.Values += (myEvent.Pass ? myEvent.Weight.ToString() : "0") + "/" + myEvent.Weight.ToString() + "\n"; // 60/60 or 0/60
+            }
+            else  if(myEvent.IncludeInScoreCard)
+            {
+                card.Labels += myEvent.Label + "\n";
+                card.Values += myEvent.Pass.ToString() + "\n";
             }
             total += myEvent.Weight;
         }
@@ -111,13 +137,25 @@ public class TestEvent : MonoBehaviour
                 if (myEvent.Pass)
                 {
                     score += myEvent.Weight;
-
+                                                            
+                }
+                if (myEvent.Weight > 0)
+                {
+                    card.Labels += myEvent.Label + "\n";
+                    card.Values += (myEvent.Pass ? myEvent.Weight.ToString() : "0") + "/" + myEvent.Weight.ToString() + "\n"; // 60/60 or 0/60
+                }
+                else if (myEvent.IncludeInScoreCard)
+                {
+                    card.Labels += myEvent.Label + "\n";
+                    card.Values += myEvent.Pass.ToString() + "\n";
                 }
                 total += myEvent.Weight;
             }
             prevEvent = prevEvent.PrevEvent;
         }
-        return score / total;
+        card.Score = (int)score;
+        card.Total = (int)total;
+        return card;
     }
 
     private void setupEvents()  //purpose to add carCollisionEvent to list of events

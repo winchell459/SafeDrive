@@ -72,7 +72,7 @@ public class DashHandler : MonoBehaviour
         clock += ":";
         if (minutes < 10) clock += "0";
         clock += minutes;
-        if (hours >= 24) hours = 0
+        if (hours >= 24) hours = 0;
         ClockText.text = clock;
 
     }
