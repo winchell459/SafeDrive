@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff9d8e721d3c6d8498ed2a9caf2e5fec, type: 3}
+  m_Name: Question1
+  m_EditorClassIdentifier: 
+  MyQuestion: What should you not do when making a right turn at an intersection?
+  Description: A brief explanation for what the player will be doing in the game
+  Answers:
+  - Changing lanes when turning
+  - Come to a complete stop
+  - Look both ways for pedestrians/traffic
+  - Turn on right blinker before turning
+  Answer: 0
