@@ -106,7 +106,7 @@ public class DashHandler : MonoBehaviour
             }
         }
     }
-
+    
     public bool HighBeamsOn() { return HighBeams.activeSelf; }
     public bool LowBeamsOn() { return LowBeams.activeSelf; }
     public float rotationRate = 45;
@@ -169,9 +169,9 @@ public class DashHandler : MonoBehaviour
         {
             RightIndicator.SetBool("Blinking", active);
         }
-
+        
     }
-
+    
     public bool GetIndicator(Indicator indicator)
     {
         if (indicator == Indicator.left) return LeftIndicator.GetBool("Blinking");

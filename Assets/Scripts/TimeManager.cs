@@ -7,8 +7,12 @@ using UnityEngine;
 public class TimeManager : MonoBehaviour
 {
     public float StartTime;
-    public float SunSet = 20 * 60 * 60;
-    public float SunRise = 6 * 60 * 60;
+    /// <summary>
+    /// time in seconds
+    /// </summary>
+    public float SunSet = 20 * 60 * 60; // 24:00
+    public float SunRise = 6 * 60 * 60; // 6:00
+    private const float dayLength = 24 * 60 * 60;
     public float CurrentTime;
     public float TimeStep = 1; //game minutes per real seconds
 
@@ -25,12 +29,14 @@ public class TimeManager : MonoBehaviour
     void Start()
     {
         CurrentTime = StartTime;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         CurrentTime += TimeStep * 60 * Time.deltaTime;
+        CurrentTime = CurrentTime % dayLength;
 
         if (CurrentTime > 12 * 60 * 60)
         {
