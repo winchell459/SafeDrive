@@ -5,7 +5,8 @@ using UnityEngine.AI;
 
 public class AICar : MonoBehaviour
 {
-    public Transform[] Waypoints;
+    private Transform[] Waypoints { get { return Markers.Markers; } }
+    public AIMarkers Markers;
     private int waypointIndex = 0;
     private Vector3 direction;
     public GameObject FrontLeftWheel, FrontRightWheel;
