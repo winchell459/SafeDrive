@@ -1,4 +1,4 @@
-Shader "Standard (Specular setup)"
+Shader "EasyRoads3D/Unity 5 Standard (Specular setup)"
 {
 	Properties
 	{

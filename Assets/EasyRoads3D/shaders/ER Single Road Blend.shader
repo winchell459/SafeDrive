@@ -1,5 +1,5 @@
 // EasyRoads3D v3 Shader
-// Blends one road textures from opposite directions (I Connector)
+// Blends one road textures from opposite directions
 
 Shader "EasyRoads3D/ER Single Road Blend" {
     Properties {
@@ -20,10 +20,6 @@ Shader "EasyRoads3D/ER Single Road Blend" {
 
         _Cutoff ("Alpha Cutoff", Range(0,1)) = 0.5
         _Threshold ("Blend Threshold", Range(0.001,1)) = 1
-
-        [Header(Terrain Z Fighting Offset)]
-		_OffsetFactor ("Offset Factor", Range(0.0,-10.0)) = -1
-        _OffsetUnit ("Offset Unit", Range(0.0,-10.0)) = -1
     }
 
     SubShader {
@@ -32,8 +28,6 @@ Shader "EasyRoads3D/ER Single Road Blend" {
             "Queue" = "AlphaTest"
             "RenderType" = "TransparentCutout"
         }
-        LOD 200
-		Offset [_OffsetFactor],[_OffsetUnit]
 
         CGPROGRAM
         #pragma surface surf Standard  fullforwardshadows alphatest:_Cutoff
@@ -79,6 +73,7 @@ Shader "EasyRoads3D/ER Single Road Blend" {
 
             fixed4 alb = 0.0f;
 			float4 c = IN.color;
+			// lerp control, this is more for terrain mesh overlays terrain splat color lerp with detail mesh color
 			if(c.a < _Threshold){
 				if(c.a > 0)c.a = (c.a / _Threshold);
 			}else{
@@ -104,5 +99,5 @@ Shader "EasyRoads3D/ER Single Road Blend" {
         ENDCG
     }
 
-    Fallback "Standard"
+    Fallback "Nature/Terrain/Diffuse"
 }

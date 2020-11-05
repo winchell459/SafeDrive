@@ -44,7 +44,7 @@ public class runtimeScript : MonoBehaviour {
 
 	void Start () {
 	
-		Debug.Log("Please read the comments at the top of the runtime script (/Assets/EasyRoads3D/Scripts/runtimeScript) before using the runtime API!");
+		Debug.Log("Please read the comments at the top before using the runtime API!");
 
 		// Create Road Network object
 		roadNetwork = new ERRoadNetwork();
@@ -63,7 +63,7 @@ public class runtimeScript : MonoBehaviour {
         // create a new road type
 		ERRoadType roadType = new ERRoadType();
 		roadType.roadWidth = 6;
-		roadType.roadMaterial = Resources.Load("Materials/roads/road material") as Material;
+		roadType.roadMaterial = Resources.Load("Materials/roads/single lane") as Material;
         // optional
         roadType.layer = 1;
         roadType.tag = "Untagged";
@@ -137,9 +137,6 @@ public class runtimeScript : MonoBehaviour {
 		// Build Road Network 
 		roadNetwork.BuildRoadNetwork();
 
-		// remove script components
-//		roadNetwork.Finalize();
-
 		// Restore Road Network 
 	//	roadNetwork.RestoreRoadNetwork();
 
@@ -179,7 +176,6 @@ public class runtimeScript : MonoBehaviour {
 			v.y += 1;
 		
 			go.transform.position = v;
-			go.transform.forward = road.GetLookatSmooth(distance, currentElement);;
 		}
 
         // spline point info center of the road
@@ -206,7 +202,6 @@ public class runtimeScript : MonoBehaviour {
 		if(roadNetwork != null){
 			if(roadNetwork.isInBuildMode){
 				roadNetwork.RestoreRoadNetwork();
-				Debug.Log("Restore Road Network");
 			}
 		}
 	}

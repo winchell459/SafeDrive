@@ -27,6 +27,7 @@ public class HeadlightDetection : EventScript
     {
         Dash = FindObjectOfType<DashHandler>();
         timerStart = Time.fixedTime;
+        initialized = true;
     }
 
     private void Update()

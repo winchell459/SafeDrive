@@ -9,14 +9,9 @@ Shader "EasyRoads3D/ER Road Transparency" {
         _MainTex ("Road", 2D) = "white" {}
         _Color ("Color", Color) = (1,1,1,1)
         _BumpMap ("Road Normal", 2D) = "bump" {}
-    //    _Metallic ("Road Metallic", Range(0.0, 1.0)) = 0.0
-        _Metallic ("Road Metallic/Smoothness", 2D) = "black"{}
-    //    _Glossiness ("Road Smoothness", Range(0.0, 1.0)) = 0.5  
-	
-		[Header(Terrain Z Fighting Offset)]
-		_OffsetFactor ("Offset Factor", Range(0.0,-10.0)) = -1
-        _OffsetUnit ("Offset Unit", Range(0.0,-10.0)) = -1
-        
+        _Metallic ("Road Metallic", Range(0.0, 1.0)) = 0.0 
+        _Glossiness ("Road Smoothness", Range(0.0, 1.0)) = 0.5  
+
     }
 
     SubShader {
@@ -28,7 +23,7 @@ Shader "EasyRoads3D/ER Road Transparency" {
 
         }
         LOD 200
-		Offset [_OffsetFactor],[_OffsetUnit]
+		Offset 0, 0
 
         CGPROGRAM
         #pragma surface surf Standard  fullforwardshadows decal:blend
@@ -43,9 +38,9 @@ Shader "EasyRoads3D/ER Road Transparency" {
 
         sampler2D _MainTex;
         sampler2D _BumpMap;
-        sampler2D _Metallic;
-	//	half _Metallic;
-	//	half _Glossiness;
+
+		half _Metallic;
+		half _Glossiness;
 
 
         half _NormalStrengh;
@@ -55,7 +50,6 @@ Shader "EasyRoads3D/ER Road Transparency" {
             float3 worldNormal;
             float2 uv_MainTex : TEXCOORD0;
             float2 uv4_BumpMap : TEXCOORD1;
-            float2 uv_Metallic : TEXCOORD2;
 
             float4 color : COLOR;
 
@@ -77,14 +71,12 @@ Shader "EasyRoads3D/ER Road Transparency" {
 
 			half alpha = 0;
 			alpha = _main.a * c.a * IN.color.a;
-
-			float4 _met = tex2D (_Metallic, IN.uv_Metallic);
-
+			
             o.Normal = UnpackNormal(nrm);
             o.Albedo = _main.rgb;
             o.Alpha = alpha;
-            o.Smoothness = _met.a;//_Glossiness;
-            o.Metallic = _met.r;//_Metallic;
+            o.Smoothness = _Glossiness;
+            o.Metallic = _Metallic;
         }
         ENDCG
     }

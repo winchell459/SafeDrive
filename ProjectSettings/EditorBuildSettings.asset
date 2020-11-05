@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/charles_terrain.unity
     guid: d45841d09c6b5c2419c2957512a7bec7
+  - enabled: 1
+    path: Assets/Scenes/TempGameMap.unity
+    guid: 5403f9b06f1ef80429cb8d683b0cc91f
   m_configObjects: {}

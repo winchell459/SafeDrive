@@ -23,10 +23,6 @@ Shader "EasyRoads3D/ER Dual Road Blend" {
 		
         _Cutoff ("Alpha Cutoff", Range(0,1)) = 0.5
         _Threshold ("Blend Threshold", Range(0.001,1)) = 1
-
-        [Header(Terrain Z Fighting Offset)]
-		_OffsetFactor ("Offset Factor", Range(0.0,-10.0)) = -1
-        _OffsetUnit ("Offset Unit", Range(0.0,-10.0)) = -1
     }
 
     SubShader {
@@ -35,12 +31,9 @@ Shader "EasyRoads3D/ER Dual Road Blend" {
             "Queue" = "AlphaTest"
             "RenderType" = "TransparentCutout"
         }
-        LOD 200
-		Offset [_OffsetFactor],[_OffsetUnit]
 
         CGPROGRAM
-   //     #pragma surface surf Standard  fullforwardshadows alphatest:_Cutoff
-   		#pragma surface surf Standard  fullforwardshadows decal:blend
+        #pragma surface surf Standard  fullforwardshadows alphatest:_Cutoff
         #pragma target 3.0
         #pragma multi_compile_fog
         #pragma exclude_renderers gles
@@ -83,6 +76,7 @@ Shader "EasyRoads3D/ER Dual Road Blend" {
 
             fixed4 alb = 0.0f;
 			float4 c = IN.color;
+			// lerp control, this is more for terrain mesh overlays terrain splat color lerp with detail mesh color
 			if(c.a < _Threshold){
 				if(c.a > 0)c.a = (c.a / _Threshold);
 			}else{
@@ -101,10 +95,6 @@ Shader "EasyRoads3D/ER Dual Road Blend" {
 			if(_main.a > _main1.a)alpha = _main.a;
 			else alpha = _main1.a;
 			
-		//	if(c.a > 0.9)c.a = 0.9;
-		//	if(alpha < 0.8) 
-			//alpha = 0;
-			
 		//	if(_mask.a < c.a)c.a = _mask.a;
 			if(_main1.a < c.a)c.a = _main1.a; 
 
@@ -117,5 +107,5 @@ Shader "EasyRoads3D/ER Dual Road Blend" {
         ENDCG
     }
 
-    Fallback "Standard"
+    Fallback "Nature/Terrain/Diffuse"
 }
