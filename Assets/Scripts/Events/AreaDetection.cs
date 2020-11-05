@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class AreaDetection : EventScript
 {
+    public bool notAreaDetector;
     private bool initialized;
     public string otherTag = "Player";
     public bool EnterPass = true; //determines whether or not area should be entered

@@ -13,34 +13,8 @@ MonoBehaviour:
   m_Name: MasterControl
   m_EditorClassIdentifier: 
   Units:
-  - Name: Units_00
-    StageScenes:
-    - SceneName: Parking_00
-      MyStage: 0
-      Pause: 1
-    - SceneName: Parking_00
-      MyStage: 2
-      Pause: 0
-    - SceneName: Parking_00
-      MyStage: 4
-      Pause: 1
-    - SceneName: Parking_00
-      MyStage: 6
-      Pause: 0
-    PassingScore: 0.7
-  - Name: Units_??
-    StageScenes:
-    - SceneName: 
-      MyStage: 0
-      Pause: 0
-    - SceneName: 
-      MyStage: 0
-      Pause: 0
-    PassingScore: 0.7
-  - Name: Units_??
-    StageScenes: []
-    PassingScore: 0.7
-  - Name: Units_??
-    StageScenes: []
-    PassingScore: 0.7
-  CurrentStage: 2
+  - {fileID: 11400000, guid: 303e902c18902574897bcccd2c6446d6, type: 2}
+  - {fileID: 11400000, guid: 09daa1f9edec5ee41a01bc083672003f, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  CurrentStage: 3

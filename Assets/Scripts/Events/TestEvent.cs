@@ -49,16 +49,7 @@ public class TestEvent : MonoBehaviour
                 {
                     if (!eventsInitialized)
                     {
-                        foreach (EventScript myEvent in events)
-                        {
-                            if (myEvent.EventType != EventScript.EventTypes.Area) myEvent.Initialize();
-                        }
-                        eventsInitialized = true;
-                        if (NextEvent)
-                        {
-                            NextEvent.Initialized = true;
-                            NextEvent.PrevEvent = this;
-                        }
+                        initializeEvents();
                     }
                     if (isEventComplete() || (CheckEngine && !FindObjectOfType<DriverHandler>().EngineState()))
                     {
@@ -75,11 +66,7 @@ public class TestEvent : MonoBehaviour
                 //(T || (...)) or (F || T && T)
                 if (!eventsInitialized)
                 {
-                    foreach (EventScript myEvent in events)
-                    {
-                        if (myEvent.EventType != EventScript.EventTypes.Area) myEvent.Initialize();
-                    }
-                    eventsInitialized = true;
+                    initializeEvents();
                 }
                 if (isEventComplete() || (CheckEngine && !FindObjectOfType<DriverHandler>().EngineState()))
                 {
@@ -87,6 +74,20 @@ public class TestEvent : MonoBehaviour
                     EventCompleted = true;
                 } 
             }
+        }
+    }
+    private void initializeEvents()
+    {
+        foreach (EventScript myEvent in events)
+        {
+            if (myEvent.EventType != EventScript.EventTypes.Area || myEvent != areaDetector) myEvent.Initialize();
+            //else if(myEvent.EventType == EventScript.EventTypes.Area && myEvent != areaDetector) myEvent.Initialize();
+        }
+        eventsInitialized = true;
+        if (NextEvent)
+        {
+            NextEvent.Initialized = true;
+            NextEvent.PrevEvent = this;
         }
     }
 
@@ -169,7 +170,7 @@ public class TestEvent : MonoBehaviour
         {
             //newEvents[i] = events[i];
             //i += 1;
-            if (MyEvents.EventType == EventScript.EventTypes.Area) areaDetector = (AreaDetection)MyEvents;
+            if (MyEvents.EventType == EventScript.EventTypes.Area && !((AreaDetection)MyEvents).notAreaDetector) areaDetector = (AreaDetection)MyEvents;
         }
         //newEvents[i] = carCollisionEvent;  
         //events = newEvents;

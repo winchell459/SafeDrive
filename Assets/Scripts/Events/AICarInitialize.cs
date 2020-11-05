@@ -11,5 +11,6 @@ public class AICarInitialize : EventScript
         Car.MovementPause(false);
         Pass = true;
         Completed = true;
+        Car.GetComponent<AICarRaycastInitializer>().StartDetection();
     }
 }
