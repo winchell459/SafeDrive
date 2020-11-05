@@ -9,18 +9,32 @@ public class AICar : MonoBehaviour
     public AIMarkers Markers;
     private int waypointIndex = 0;
     private Vector3 direction;
-    public GameObject FrontLeftWheel, FrontRightWheel;
+    public GameObject FrontLeftWheel, FrontRightWheel, RearLeftWheel, RearRightWheel;
+    public float WheelRadius = 0.0125f;
     private GameObject player;
     float angle;
     public GameObject HighBeams; //lights with flare
     public GameObject LowBeams;
     public float DistanceToPlayer = 25;
+    
+    private Vector3 velocityPos;
+    private float wheelLeftAngle, wheelRightAngle;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        //GetComponent<NavMeshAgent>().SetDestination(Waypoints[waypointIndex].position);
+        
+        velocityPos = transform.position;
+        wheelLeftAngle = FrontLeftWheel.transform.localEulerAngles.x;
+        wheelRightAngle = FrontRightWheel.transform.localEulerAngles.x;
+        
         direction = transform.forward;
         player = FindObjectOfType<UnityStandardAssets.Vehicles.Car.CarController>().gameObject;
+    }
+    private void FixedUpdate()
+    {
+        
     }
 
     // Update is called once per frame
@@ -45,9 +59,23 @@ public class AICar : MonoBehaviour
             angle = Vector3.SignedAngle(transform.forward, Waypoints[waypointIndex].position - transform.position, transform.up);
             //car.Move(90 / angle, 0, 0, 0, 0);
         }
+        //calc the wheel angular velocity
+        Vector3 displacement = transform.position - velocityPos;
+        //dot product gets the velocity in the forward direction of vehicle
+        float velocity = Vector3.Dot(displacement, transform.forward);
+        float angularDisplacement = (180/3.14f) *velocity / WheelRadius;
+        wheelLeftAngle += angularDisplacement;
+        wheelRightAngle += angularDisplacement;
+
+        //save position for next frame
+        velocityPos = transform.position;
+
         angle = Vector3.SignedAngle(transform.forward, Waypoints[waypointIndex].position - transform.position, transform.up);
-        FrontLeftWheel.transform.localEulerAngles = new Vector3(0, angle, 0);
-        FrontRightWheel.transform.localEulerAngles = new Vector3(0, angle, 0);
+
+        FrontLeftWheel.transform.localEulerAngles = new Vector3(wheelLeftAngle, angle, 0);
+        FrontRightWheel.transform.localEulerAngles = new Vector3(wheelRightAngle, angle, 0);
+        RearLeftWheel.transform.localEulerAngles = new Vector3(wheelLeftAngle, 0, 0);
+        RearRightWheel.transform.localEulerAngles = new Vector3(wheelRightAngle, 0, 0);
         //car.Move(90 / angle, 0, 0, 0, 0);
         //Debug.Log(waypointIndex); still a problem (runtime error)
         direction = transform.forward;
