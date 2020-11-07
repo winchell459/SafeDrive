@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 
 public class TimeManager : MonoBehaviour
@@ -12,6 +11,10 @@ public class TimeManager : MonoBehaviour
     /// </summary>
     public float SunSet = 20 * 60 * 60;
     public float SunRise = 6 * 60 * 60;
+    public float MidnightTime = 24 * 60 * 60;
+    public float SunSetAngle = 185;
+    public float SunRiseAngle = -5;
+    public float MidnightAngle = -107;
     private float dayLength = 24 * 60 * 60;
     public float CurrentTime;
     public float TimeStep = 1; //game minutes per real seconds
@@ -25,10 +28,21 @@ public class TimeManager : MonoBehaviour
     public float MaxIntensity = 1;
     public float MinIntensity = 0;
 
+    public enum SunStyle                                                                                                      
+    {
+        SunRotate,
+        ExposureLevel
+    }
+    public SunStyle style;
+
+    float sunYAngleDefault;
+    float sunZAngleDefault;
     // Start is called before the first frame update
     void Start()
     {
         CurrentTime = StartTime;
+        sunYAngleDefault = TheLight.transform.eulerAngles.y;
+        sunZAngleDefault = TheLight.transform.eulerAngles.z;
     }
 
     // Update is called once per frame
@@ -37,6 +51,50 @@ public class TimeManager : MonoBehaviour
         CurrentTime += TimeStep * 60 * Time.deltaTime;
         CurrentTime %= dayLength;
 
+        if (style == SunStyle.ExposureLevel)
+            ExposureLevel();
+        else if (style == SunStyle.SunRotate)
+            SunRotate();
+    }
+    void SunRotate()
+    {
+        if(CurrentTime < SunSet && CurrentTime >= SunRise)
+        {
+            float slope = (SunSetAngle - SunRiseAngle) / (SunSet - SunRise);
+            float currentAngle = CurrentTime * slope + SunRiseAngle - slope * SunRise;
+            Debug.Log("currentAngle: " + currentAngle + " slope: " + slope + " timeframe: " + (SunSet - SunRise) + " CurrentTime: " + CurrentTime);
+            TheLight.transform.localEulerAngles = new Vector3(currentAngle, sunYAngleDefault, sunZAngleDefault);
+        }
+        else if (CurrentTime < MidnightTime && CurrentTime >= SunSet)
+        {
+            float slope = loopLength(SunSetAngle, SunRiseAngle, 360) / loopLength(SunSet, SunRise, 86400);
+            float currentAngle = CurrentTime * slope + SunSetAngle - slope * SunSet;
+            Debug.Log("currentAngle: " + currentAngle + " slope: " + slope + " timeframe: " + loopLength(SunSet, SunRise, 86400) +  " CurrentTime: " + CurrentTime);
+            TheLight.transform.localEulerAngles = new Vector3(currentAngle, sunYAngleDefault, sunZAngleDefault);
+        }
+        else
+        {
+            float slope = loopLength(SunSetAngle, SunRiseAngle, 360) / loopLength(SunSet, SunRise, 86400);
+            float currentAngle = CurrentTime * slope + MidnightAngle;
+            Debug.Log("currentAngle: " + currentAngle + " slope: " + slope + " timeframe: " + (SunRise - MidnightTime) + " CurrentTime: " + CurrentTime);
+            TheLight.transform.localEulerAngles = new Vector3(currentAngle, sunYAngleDefault, sunZAngleDefault);
+        }
+        
+    }
+    float loopLength(float start, float end, float size)
+    {
+        if (start < end)
+        {
+            return end - start;
+        }
+        else
+        {
+            return size - start + end; //360 - 185 + -5 = 170
+        }
+    }
+
+    void ExposureLevel()
+    {
         if (CurrentTime > 12 * 60 * 60)
         {
             float l0 = SunSet - (12 * 60 * 60);

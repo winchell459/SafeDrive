@@ -57,8 +57,8 @@ public class UnitHandler : MonoBehaviour  //UnitHandler accesses the MasterContr
         }
         else if (MC.CurrentStage == MasterControl.UnitStages.PracticalTest)
         {
-            if (!PracticalMarkers.MarkerActive) PracticalMarkers.MarkerActive = true;
-            if (PracticalTest.EventCompleted) MC.NextStage();
+            if (PracticalMarkers && !PracticalMarkers.MarkerActive) PracticalMarkers.MarkerActive = true;
+            if (PracticalTest && PracticalTest.EventCompleted) MC.NextStage();
         }
         else if (MC.CurrentStage == MasterControl.UnitStages.Score)
         {
