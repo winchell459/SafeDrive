@@ -62,21 +62,21 @@ public class TimeManager : MonoBehaviour
         {
             float slope = (SunSetAngle - SunRiseAngle) / (SunSet - SunRise);
             float currentAngle = CurrentTime * slope + SunRiseAngle - slope * SunRise;
-            Debug.Log("currentAngle: " + currentAngle + " slope: " + slope + " timeframe: " + (SunSet - SunRise) + " CurrentTime: " + CurrentTime);
+            //Debug.Log("currentAngle: " + currentAngle + " slope: " + slope + " timeframe: " + (SunSet - SunRise) + " CurrentTime: " + CurrentTime);
             TheLight.transform.localEulerAngles = new Vector3(currentAngle, sunYAngleDefault, sunZAngleDefault);
         }
         else if (CurrentTime < MidnightTime && CurrentTime >= SunSet)
         {
             float slope = loopLength(SunSetAngle, SunRiseAngle, 360) / loopLength(SunSet, SunRise, 86400);
             float currentAngle = CurrentTime * slope + SunSetAngle - slope * SunSet;
-            Debug.Log("currentAngle: " + currentAngle + " slope: " + slope + " timeframe: " + loopLength(SunSet, SunRise, 86400) +  " CurrentTime: " + CurrentTime);
+            //Debug.Log("currentAngle: " + currentAngle + " slope: " + slope + " timeframe: " + loopLength(SunSet, SunRise, 86400) +  " CurrentTime: " + CurrentTime);
             TheLight.transform.localEulerAngles = new Vector3(currentAngle, sunYAngleDefault, sunZAngleDefault);
         }
         else
         {
             float slope = loopLength(SunSetAngle, SunRiseAngle, 360) / loopLength(SunSet, SunRise, 86400);
             float currentAngle = CurrentTime * slope + MidnightAngle;
-            Debug.Log("currentAngle: " + currentAngle + " slope: " + slope + " timeframe: " + (SunRise - MidnightTime) + " CurrentTime: " + CurrentTime);
+            //Debug.Log("currentAngle: " + currentAngle + " slope: " + slope + " timeframe: " + (SunRise - MidnightTime) + " CurrentTime: " + CurrentTime);
             TheLight.transform.localEulerAngles = new Vector3(currentAngle, sunYAngleDefault, sunZAngleDefault);
         }
         
