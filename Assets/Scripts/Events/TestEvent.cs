@@ -7,6 +7,7 @@ public class TestEvent : MonoBehaviour
     public EventScript[] events;
     public CollisionDetection carCollisionEvent;
     private AreaDetection areaDetector;
+    public List<TestEvent> NextEvents;
     public TestEvent NextEvent, PrevEvent;
     public bool Initialized = false;
     public bool CheckEngine = false;
@@ -26,6 +27,7 @@ public class TestEvent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (NextEvent && !NextEvents.Contains(NextEvent)) NextEvents.Add(NextEvent);
         setupEvents();
         if (areaDetector) areaDetector.Initialize();
     }
@@ -84,10 +86,10 @@ public class TestEvent : MonoBehaviour
             //else if(myEvent.EventType == EventScript.EventTypes.Area && myEvent != areaDetector) myEvent.Initialize();
         }
         eventsInitialized = true;
-        if (NextEvent)
+        foreach(TestEvent nextEvent in NextEvents)
         {
-            NextEvent.Initialized = true;
-            NextEvent.PrevEvent = this;
+            nextEvent.Initialized = true;
+            nextEvent.PrevEvent = this;
         }
     }
 
@@ -156,6 +158,7 @@ public class TestEvent : MonoBehaviour
         }
         card.Score = (int)score;
         card.Total = (int)total;
+        Debug.Log(transform.name + " score: " + card.Score + " total: " + card.Total);
         return card;
     }
 

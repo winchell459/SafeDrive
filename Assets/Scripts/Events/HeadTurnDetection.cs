@@ -5,7 +5,7 @@ using UnityEngine;
 public class HeadTurnDetection : EventScript
 {
     public float TurnHeadThreshold = 15;
-    private CameraController head;
+    [SerializeField] private CameraController head;
 
     public override void Initialize()
     {

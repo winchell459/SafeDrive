@@ -54,21 +54,24 @@ public class TimeManager : MonoBehaviour
         else if (style == SunStyle.SunRotate)
             SunRotate();
     }
+    float lastAngle = 0;
     void SunRotate()
     {
         if(CurrentTime < SunSet && CurrentTime >= SunRise)
         {
-            float slope = (SunSetAngle - SunRiseAngle) / (SunSet - SunRise);
+            float slope = (SunSetAngle - SunRiseAngle) / loopLength(SunRise, SunSet,24);
             float currentAngle = CurrentTime * slope + SunRiseAngle - slope * SunRise;
-            Debug.Log("currentAngle: " + currentAngle + " at " + CurrentTime);
+            //Debug.Log("currentAngle: " + currentAngle + " at " + CurrentTime + " dA = " + (currentAngle - lastAngle) / Time.deltaTime + " slope: " + slope);
             TheLight.transform.eulerAngles = new Vector3(currentAngle, sunYAngleDefault, sunZAngleDefault);
+            lastAngle = currentAngle;
         }
         else
         {
             float slope = (SunRiseAngle - SunSetAngle ) / loopLength(SunSet, SunRise, 24);
             float currentAngle = CurrentTime * slope + SunRiseAngle - slope * SunRise;
-            Debug.Log("currentAngle: " + currentAngle + " at " + CurrentTime);
+            //Debug.Log("currentAngle: " + currentAngle + " at " + CurrentTime + " dA = " + (currentAngle - lastAngle) /Time.deltaTime + " slope: " + slope);
             TheLight.transform.eulerAngles = new Vector3(currentAngle, sunYAngleDefault, sunZAngleDefault);
+            lastAngle = currentAngle;
         }
         
     }
@@ -81,6 +84,7 @@ public class TimeManager : MonoBehaviour
         }
         else
         {
+            
             return size - start + end; //360 - 185 + -5 = 170
         }
     }
