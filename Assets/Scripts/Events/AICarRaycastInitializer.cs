@@ -24,7 +24,7 @@ public class AICarRaycastInitializer : MonoBehaviour
             RaycastHit hit;
             if(Physics.Raycast(RaycastOrigin.position, (Target.position - RaycastOrigin.position).normalized, out hit))
             {
-                Debug.Log("RaycastDistance: " + hit.transform.name + " " + hit.distance);
+                //Debug.Log("RaycastDistance: " + hit.transform.name + " " + hit.distance);
                 if (hit.transform.CompareTag("Player") && hit.distance < DistanceDetection)
                 {
                     EventToTrigger.Initialized = true;

@@ -47,45 +47,43 @@ public class TestEvent : MonoBehaviour
             }
             if (areaDetector)
             {
-                if(areaDetector.Completed && areaDetector.Pass)
+                if(areaDetector.Completed && (areaDetector.EnterPass && areaDetector.Pass || !areaDetector.EnterPass && !areaDetector.Pass)) //enterPass && pass || !enterPass && !pass
                 {
-                    if (!eventsInitialized)
-                    {
-                        initializeEvents();
-                    }
-                    if (isEventComplete() || (CheckEngine && !FindObjectOfType<DriverHandler>().EngineState()))
-                    {
-                        score = scoreEvent();
-                        EventCompleted = true;
-                    }
+                    handleEvents();
                 }
             }
             else
             {
-                /* bool complete = true;
+                handleEvents();
+            }
+        }
+    }
+    void handleEvents()
+    {
+        /* bool complete = true;
                  bool pass = true;
                  foreach(EventScript myEvent in events)  */
-                //(T || (...)) or (F || T && T)
-                if (!eventsInitialized)
-                {
-                    initializeEvents();
-                }
-                if (isEventComplete() || (CheckEngine && !FindObjectOfType<DriverHandler>().EngineState()))
-                {
-                    score = scoreEvent();
-                    EventCompleted = true;
-                } 
-            }
+        //(T || (...)) or (F || T && T)
+        if (!eventsInitialized)
+        {
+            initializeEvents();
+        }
+        if (isEventComplete() || (CheckEngine && !FindObjectOfType<DriverHandler>().EngineState()))
+        {
+            score = scoreEvent();
+            EventCompleted = true;
         }
     }
     private void initializeEvents()
     {
+        //initializes detectors
         foreach (EventScript myEvent in events)
         {
             if (myEvent.EventType != EventScript.EventTypes.Area || myEvent != areaDetector) myEvent.Initialize();
-            //else if(myEvent.EventType == EventScript.EventTypes.Area && myEvent != areaDetector) myEvent.Initialize();
         }
         eventsInitialized = true;
+
+        //initializes next events
         foreach(TestEvent nextEvent in NextEvents)
         {
             nextEvent.Initialized = true;
