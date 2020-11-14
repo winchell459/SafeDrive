@@ -34,7 +34,7 @@ AnimatorController:
   m_Name: Bus School N031213
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: BlinkingRedLights
+  - m_Name: RedLightBlinking
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -60,7 +60,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BlinkingRedLights
+  m_Name: RedLightBlinking
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -108,7 +108,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: BlinkingRedLights
+    m_ConditionEvent: RedLightBlinking
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 296700596198767381}
@@ -133,7 +133,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: BlinkingRedLights
+    m_ConditionEvent: RedLightBlinking
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4532636715633917993}
