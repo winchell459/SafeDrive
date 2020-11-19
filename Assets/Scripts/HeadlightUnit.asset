@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9164c7b7e70b9648b1e4697940fabb1, type: 3}
   m_Name: HeadlightUnit
   m_EditorClassIdentifier: 
-  Name: Unit_02
+  Name: Unit_03
   StageScenes:
-  - SceneName: TempGameMap
+  - SceneName: HUnitMap
     MyStage: 0
     Pause: 1
-  - SceneName: TempGameMap
+  - SceneName: HUnitMap
     MyStage: 2
     Pause: 0
-  - SceneName: TempGameMap
+  - SceneName: HUnitMap
     MyStage: 4
     Pause: 1
-  - SceneName: TempGameMap
+  - SceneName: HUnitMap
     MyStage: 6
     Pause: 0
   PassingScore: 0.7

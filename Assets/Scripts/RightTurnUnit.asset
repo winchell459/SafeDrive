@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Unit_01
   StageScenes:
-  - SceneName: TempGameMap
+  - SceneName: RTUnitMap
     MyStage: 0
     Pause: 1
-  - SceneName: TempGameMap
+  - SceneName: RTUnitMap
     MyStage: 2
     Pause: 0
-  - SceneName: TempGameMap
+  - SceneName: RTUnitMap
     MyStage: 4
     Pause: 1
-  - SceneName: TempGameMap
+  - SceneName: RTUnitMap
     MyStage: 6
     Pause: 0
   PassingScore: 0.7

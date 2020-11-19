@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9164c7b7e70b9648b1e4697940fabb1, type: 3}
   m_Name: HillParkingUnit
   m_EditorClassIdentifier: 
-  Name: Unit_01
+  Name: Unit_02
   StageScenes:
-  - SceneName: Parking_00
+  - SceneName: HPUnitMap
     MyStage: 0
-    Pause: 0
-  - SceneName: Parking_00
-    MyStage: 3
     Pause: 1
-  - SceneName: Parking_00
-    MyStage: 4
+  - SceneName: HPUnitMap
+    MyStage: 2
     Pause: 0
-  - SceneName: Parking_00
+  - SceneName: HPUnitMap
+    MyStage: 4
+    Pause: 1
+  - SceneName: HPUnitMap
     MyStage: 6
     Pause: 0
   PassingScore: 0.7
