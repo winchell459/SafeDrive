@@ -19,7 +19,7 @@ public class BusWaitDetection : EventScript
     // Update is called once per frame
     void Update()
     {
-        Debug.Log((flashingStarted + FlashingDuration - Time.time));
+        //Debug.Log((flashingStarted + FlashingDuration - Time.time));
         if(flashing && Time.time > flashingStarted + FlashingDuration && !AreaDetector.Completed)
         {
             Pass = true;

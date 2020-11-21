@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class MasterControl : ScriptableObject
 {
     public Units[] Units;
+    public string Credits = "Credits";
 
     private int unitIndex = 0;
     public enum UnitStages
@@ -29,6 +30,8 @@ public class MasterControl : ScriptableObject
         get { return Units[unitIndex].GetPaused(CurrentStage); }
         // set {; }
     }
+
+    public bool SceneLoading;
     public void StartUnits()  //resets units back to Start
     {
         unitIndex = 0;
@@ -41,7 +44,12 @@ public class MasterControl : ScriptableObject
         unitIndex += 1;
         if(unitIndex < Units.Length)
         {
+            SceneLoading = true;
             SceneManager.LoadScene(Units[unitIndex].GetScene(0));
+        }
+        else
+        {
+            SceneManager.LoadScene(Credits);
         }
     }
 
@@ -63,6 +71,7 @@ public class MasterControl : ScriptableObject
     }
     public void ReloadCurrentStage()
     {
+        CurrentStage -= 1;
         SceneManager.LoadScene(Units[unitIndex].GetScene(CurrentStage));
     }
 }

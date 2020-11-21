@@ -11,10 +11,15 @@ public class UnitHandler : MonoBehaviour  //UnitHandler accesses the MasterContr
 
     public Marker PretestMarkers, PracticalMarkers;
 
+    private void Start()
+    {
+        MC.SceneLoading = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if(MC.CurrentStage == MasterControl.UnitStages.Start)
+        if(MC.CurrentStage == MasterControl.UnitStages.Start && !MC.SceneLoading)
         {
             if (!StartPromptPanel.activeSelf) StartPromptPanel.SetActive(true);
             if (Input.GetMouseButtonDown(0))
@@ -55,7 +60,7 @@ public class UnitHandler : MonoBehaviour  //UnitHandler accesses the MasterContr
             if (UnitQuestion.QuestionActive) UnitQuestion.HideQuestion();
             MC.NextStage();
         }
-        else if (MC.CurrentStage == MasterControl.UnitStages.PracticalTest)
+        else if (MC.CurrentStage == MasterControl.UnitStages.PracticalTest && !MC.SceneLoading)
         {
             if (PracticalMarkers && !PracticalMarkers.MarkerActive) PracticalMarkers.MarkerActive = true;
             if (PracticalTest && PracticalTest.EventCompleted) MC.NextStage();
@@ -66,11 +71,11 @@ public class UnitHandler : MonoBehaviour  //UnitHandler accesses the MasterContr
             {
                 ScorePanel.SetActive(true);
                 TestEvent.ScoreCard card = PracticalTest.score;
-                bool passed = card.Score / card.Total > 0.7f;
-                ScorePanel.GetComponent<ScorePanelHandler>().DisplayScore(card, true, passed);
+                bool passed = card.Score / card.Total > MC.PassingScore;
+                ScorePanel.GetComponent<ScorePanelHandler>().DisplayScore(card, false, passed);
             }
         }
-
+        //Debug.Log(StartPromptPanel.activeSelf);
 
     }
 
@@ -82,6 +87,7 @@ public class UnitHandler : MonoBehaviour  //UnitHandler accesses the MasterContr
 
     public void RetryButton()
     {
+        ScorePanel.SetActive(false);
         MC.ReloadCurrentStage();
     }
 }

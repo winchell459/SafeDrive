@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ScorePanelHandler : MonoBehaviour
 {
-    public Text Labels, Values;
+    public Text Title, Labels, Values;
     public Button ContinueButton, RetryButton;
 
     public void DisplayScore(TestEvent.ScoreCard scoreCard, bool isPretest, bool pass)
@@ -15,6 +15,10 @@ public class ScorePanelHandler : MonoBehaviour
         if (isPretest)
         {
             RetryButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            Title.text = "Test Results";
         }
 
         Labels.text = scoreCard.Labels;
