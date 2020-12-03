@@ -42,6 +42,7 @@ namespace UnityStandardAssets.Vehicles.Car
         public float dopplerLevel = 1;                                              // The mount of doppler effect used in the audio
         public bool useDoppler = true;                                              // Toggle for using doppler
 
+        public float volumeControl;
         private AudioSource m_LowAccel; // Source for the low acceleration sounds
         private AudioSource m_LowDecel; // Source for the low deceleration sounds
         private AudioSource m_HighAccel; // Source for the high acceleration sounds
@@ -114,7 +115,7 @@ namespace UnityStandardAssets.Vehicles.Car
                     // for 1 channel engine sound, it's oh so simple:
                     m_HighAccel.pitch = pitch*pitchMultiplier*highPitchMultiplier;
                     m_HighAccel.dopplerLevel = useDoppler ? dopplerLevel : 0;
-                    m_HighAccel.volume = 1;
+                    m_HighAccel.volume = volumeControl;
                 }
                 else
                 {
@@ -141,10 +142,10 @@ namespace UnityStandardAssets.Vehicles.Car
                     decFade = 1 - ((1 - decFade)*(1 - decFade));
 
                     // adjust the source volumes based on the fade values
-                    m_LowAccel.volume = lowFade*accFade;
-                    m_LowDecel.volume = lowFade*decFade;
-                    m_HighAccel.volume = highFade*accFade;
-                    m_HighDecel.volume = highFade*decFade;
+                    m_LowAccel.volume = lowFade*accFade * volumeControl;
+                    m_LowDecel.volume = lowFade*decFade * volumeControl;
+                    m_HighAccel.volume = highFade*accFade * volumeControl;
+                    m_HighDecel.volume = highFade*decFade * volumeControl;
 
                     // adjust the doppler levels
                     m_HighAccel.dopplerLevel = useDoppler ? dopplerLevel : 0;

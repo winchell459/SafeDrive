@@ -136,12 +136,14 @@ public class DashHandler : MonoBehaviour
     }         
 
     bool honking = false;
+    public float volumeControl = 1;
     private void HandleHorn()
     {
         if (!honking && Input.GetAxis("Honk") > 0.1f)
         {
             honking = true;
             PlayerCameraSource.clip = HornClip;
+            PlayerCameraSource.volume = volumeControl;
             PlayerCameraSource.Play();
         }
         else if (Input.GetAxis("Honk") < 0.1f) honking = false;

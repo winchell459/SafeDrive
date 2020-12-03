@@ -71,6 +71,7 @@ public class MasterControl : ScriptableObject
     }
     public void ReloadCurrentStage()
     {
+        SceneLoading = true;
         CurrentStage -= 1;
         SceneManager.LoadScene(Units[unitIndex].GetScene(CurrentStage));
     }

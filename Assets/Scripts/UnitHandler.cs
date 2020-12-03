@@ -71,11 +71,12 @@ public class UnitHandler : MonoBehaviour  //UnitHandler accesses the MasterContr
             {
                 ScorePanel.SetActive(true);
                 TestEvent.ScoreCard card = PracticalTest.score;
-                bool passed = card.Score / card.Total > MC.PassingScore;
+                float score = (float)card.Score / (float)card.Total;
+                bool passed = score > MC.PassingScore;
+                Debug.Log("Score/Total: " + score + " > " + MC.PassingScore);
                 ScorePanel.GetComponent<ScorePanelHandler>().DisplayScore(card, false, passed);
             }
         }
-        //Debug.Log(StartPromptPanel.activeSelf);
 
     }
 
