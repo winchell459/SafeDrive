@@ -10,6 +10,7 @@ public class OptionsMenuHandler : MonoBehaviour
 
     public void Start()
     {
+        
         SetVolume();
         foreach (AudioSource source in GameObject.FindObjectsOfType<AudioSource>())
         {
@@ -44,6 +45,12 @@ public class OptionsMenuHandler : MonoBehaviour
         volControl.SetVolume(volumeSlider.GetComponent<UnityEngine.UI.Slider>().value);
         Debug.Log("SliderValue: " + volumeSlider.GetComponent<UnityEngine.UI.Slider>().value);
     }
+
+    public void ResetStageButton()
+    {
+        FindObjectOfType<UnitHandler>().ResetCurrentStage();
+        
+    }
 }
 
 [System.Serializable]
@@ -55,8 +62,11 @@ public class VolumeControl
 
     public void SetVolume(float volume)
     {
+        if(!DashVolume) DashVolume = GameObject.FindObjectOfType<DashHandler>();
         DashVolume.volumeControl = volume;
+        if (!CarVolume) CarVolume = GameObject.FindObjectOfType<UnityStandardAssets.Vehicles.Car.CarAudio>();
         CarVolume.volumeControl = volume;
+        if(!Wheels) Wheels = GameObject.FindObjectOfType<UnityStandardAssets.Vehicles.Car.CarController>().Wheels;
         foreach (AudioSource source in Wheels.transform.GetComponentsInChildren<AudioSource>())
         {
             source.volume = volume;

@@ -89,6 +89,11 @@ public class UnitHandler : MonoBehaviour  //UnitHandler accesses the MasterContr
     public void RetryButton()
     {
         ScorePanel.SetActive(false);
+        MC.ReloadCurrentScoringStage();
+    }
+
+    public void ResetCurrentStage()
+    {
         MC.ReloadCurrentStage();
     }
 }

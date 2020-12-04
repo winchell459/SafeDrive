@@ -31,31 +31,49 @@ public class TestEvent : MonoBehaviour
         setupEvents();
         if (areaDetector) areaDetector.Initialize();
     }
-                                                                                        
+
     // Update is called once per frame
     //Used to control sequence of events (initiates events in a certain order, activates or deactivates events)
+    bool notInitizlizedCheck = false;
+    bool eventCompletedCheck = false;
     void Update()
     {
         if (Initialized && !EventCompleted)
         {
-            if (carCollisionEvent.Completed && !carCollisionEvent.Pass) //then fail all tests
+            //Debuger.MyLog("TestEvent Initialized not completed: " + gameObject.name);
+            if(!carCollisionEvent) carCollisionEvent = GameObject.FindGameObjectWithTag("Player").GetComponent<CollisionDetection>();
+            else if (carCollisionEvent.Completed && !carCollisionEvent.Pass) //then fail all tests
             {
                 EventCompleted = true;
                 score.Total = 0;
                 score.Labels = "Avoided Collisions \n\n Event Failed!";
                 score.Values = "False";
             }
+            //Debuger.MyLog("TestEvent Initialized not completed: " + gameObject.name);
             if (areaDetector)
             {
-                if(areaDetector.Completed && (areaDetector.EnterPass && areaDetector.Pass || !areaDetector.EnterPass && !areaDetector.Pass)) //enterPass && pass || !enterPass && !pass
+                //Debuger.MyLog("has areaDetector: " + gameObject.name);
+                if (areaDetector.Completed && (areaDetector.EnterPass && areaDetector.Pass || !areaDetector.EnterPass && !areaDetector.Pass)) //enterPass && pass || !enterPass && !pass
                 {
+                    //Debuger.MyLog("areaDetector completed: " + gameObject.name);
                     handleEvents();
                 }
             }
             else
             {
+                //Debuger.MyLog("areaDetector missing: " + gameObject.name);
                 handleEvents();
             }
+        }
+        else if (!Initialized && !notInitizlizedCheck)
+        {
+            //Debuger.MyLog("TestEvent not Initialized: " + gameObject.name);
+            notInitizlizedCheck = true;
+        }
+        else if(!eventCompletedCheck)
+        {
+            //Debuger.MyLog("TestEvent EventCompleted: " + gameObject.name);
+            eventCompletedCheck = true;
         }
     }
     void handleEvents()
@@ -66,11 +84,13 @@ public class TestEvent : MonoBehaviour
         //(T || (...)) or (F || T && T)
         if (!eventsInitialized)
         {
+            //Debuger.MyLog("TestEvent Initialized: " + gameObject.name);
             InitializeEvents();
         }
         if (isEventComplete() || (CheckEngine && !FindObjectOfType<DriverHandler>().EngineState()))
         {
             score = scoreEvent();
+            //Debuger.MyLog("EventCompleted = true: " + gameObject.name);
             EventCompleted = true;
         }
     }
@@ -164,6 +184,7 @@ public class TestEvent : MonoBehaviour
     {
         events = GetComponents<EventScript>();
         carCollisionEvent = GameObject.FindGameObjectWithTag("Player").GetComponent<CollisionDetection>();
+        
         //EventScript[] newEvents = new EventScript[events.Length + 1];
 
         //int i = 0;
@@ -171,7 +192,11 @@ public class TestEvent : MonoBehaviour
         {
             //newEvents[i] = events[i];
             //i += 1;
-            if (MyEvents.EventType == EventScript.EventTypes.Area && !((AreaDetection)MyEvents).notAreaDetector) areaDetector = (AreaDetection)MyEvents;
+            if (MyEvents.EventType == EventScript.EventTypes.Area && !((AreaDetection)MyEvents).notAreaDetector)
+            {
+                areaDetector = (AreaDetection)MyEvents;
+                //Debuger.MyLog("areaDetector setup: " + gameObject.name);
+            }
         }
         //newEvents[i] = carCollisionEvent;  
         //events = newEvents;

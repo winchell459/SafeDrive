@@ -57,6 +57,8 @@ namespace UnityStandardAssets.Vehicles.Car
         public float Revs { get; private set; }
         public float AccelInput { get; private set; }
 
+        public GameObject Wheels { get { return m_WheelColliders[0].transform.parent.gameObject; } }
+
         // Use this for initialization
         private void Start()
         {

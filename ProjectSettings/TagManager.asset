@@ -11,6 +11,8 @@ TagManager:
   - Obstacle
   - Curb
   - Ground
+  - water
+  - DebugText
   layers:
   - Default
   - TransparentFX
