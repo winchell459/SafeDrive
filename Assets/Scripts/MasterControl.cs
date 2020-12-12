@@ -27,7 +27,7 @@ public class MasterControl : ScriptableObject
     public float PassingScore { get { return Units[unitIndex].PassingScore; } }
     public bool Paused
     {
-        get { return Units[unitIndex].GetPaused(CurrentStage); }
+        get { return unitIndex < Units.Length ? Units[unitIndex].GetPaused(CurrentStage) : false; }//return (if this is true) ? (then return this) : (else return this);
         // set {; }
     }
 
@@ -38,19 +38,36 @@ public class MasterControl : ScriptableObject
         CurrentStage = 0;
         SceneManager.LoadScene(Units[0].GetScene(0));
     }
+    public int unlockedUnit = 0;
 
+    public void UnlockMaxUnit()
+    {
+        //unlockedUnit = Mathf.Max(unlockedUnit, unitIndex);
+        if (unlockedUnit < unitIndex)
+        {
+            unlockedUnit = unitIndex;
+        }
+    }
     public void StartNextUnit()
     {
         unitIndex += 1;
         if(unitIndex < Units.Length)
         {
-            SceneLoading = true;
-            SceneManager.LoadScene(Units[unitIndex].GetScene(0));
+            UnlockMaxUnit();
+            LoadUnit(unitIndex);
         }
         else
         {
             SceneManager.LoadScene(Credits);
         }
+    }
+
+    public void LoadUnit(int unitIndex)
+    {
+        this.unitIndex = unitIndex;
+        CurrentStage = 0;
+        SceneLoading = true;
+        SceneManager.LoadScene(Units[unitIndex].GetScene(0));
     }
 
     public void NextStage()
@@ -72,8 +89,13 @@ public class MasterControl : ScriptableObject
     public void ReloadCurrentStage()
     {
         SceneLoading = true;
-        CurrentStage -= 1;
         SceneManager.LoadScene(Units[unitIndex].GetScene(CurrentStage));
+    }
+
+    public void ReloadCurrentScoringStage()
+    {
+        CurrentStage -= 1;
+        ReloadCurrentStage();
     }
 }
 

@@ -18,19 +18,19 @@ public class SystemHandler : MonoBehaviour
     private void Update()
     {
         handleMenu();
-        handleMainMenu();
+        //handleMainMenu();
     }
 
-    private void handleMainMenu()
-    {
-        if(SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                MC.StartUnits();
-            }
-        }
-    }
+    //private void handleMainMenu()
+    //{
+    //    if(SceneManager.GetActiveScene().buildIndex == 0)
+    //    {
+    //        if (Input.GetMouseButtonDown(0))
+    //        {
+    //            MC.StartUnits();
+    //        }
+    //    }
+    //}
                                                                                        
     private void handleMenu()
     {
@@ -43,5 +43,10 @@ public class SystemHandler : MonoBehaviour
             else
                 Cursor.lockState = CursorLockMode.None;
         }
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

@@ -38,7 +38,8 @@ public class TestEvent : MonoBehaviour
     {
         if (Initialized && !EventCompleted)
         {
-            if (carCollisionEvent.Completed && !carCollisionEvent.Pass) //then fail all tests
+            if (!carCollisionEvent) carCollisionEvent = GameObject.FindGameObjectWithTag("Player").GetComponent<CollisionDetection>();
+            else if (carCollisionEvent.Completed && !carCollisionEvent.Pass) //then fail all tests
             {
                 EventCompleted = true;
                 score.Total = 0;
@@ -163,7 +164,6 @@ public class TestEvent : MonoBehaviour
     private void setupEvents()  //purpose to add carCollisionEvent to list of events
     {
         events = GetComponents<EventScript>();
-        carCollisionEvent = GameObject.FindGameObjectWithTag("Player").GetComponent<CollisionDetection>();
         //EventScript[] newEvents = new EventScript[events.Length + 1];
 
         //int i = 0;

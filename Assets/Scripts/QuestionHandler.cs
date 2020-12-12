@@ -33,7 +33,7 @@ public class QuestionHandler : MonoBehaviour
 
     public void InputAnswer(int answer)
     {
-        Debug.Log(answer == CurrentQuestion.Answer ? "Correct" : "Incorrect");
+        //Debug.Log(answer == CurrentQuestion.Answer ? "Correct" : "Incorrect");
 
         //string response == answer == CurrentQuestion.Answer ? "Correct" : "Incorrect");
 
