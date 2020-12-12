@@ -10,8 +10,8 @@ public class OptionsMenuHandler : MonoBehaviour
 
     public void Start()
     {
-        
-        SetVolume();
+
+        SetDefaultVolume();
         foreach (AudioSource source in GameObject.FindObjectsOfType<AudioSource>())
         {
             Debug.Log(source.gameObject.name + ": " + source.volume);
@@ -42,14 +42,32 @@ public class OptionsMenuHandler : MonoBehaviour
 
     public void SetVolume()//UnityEngine.UI.Slider slider
     {
-        volControl.SetVolume(volumeSlider.GetComponent<UnityEngine.UI.Slider>().value);
-        Debug.Log("SliderValue: " + volumeSlider.GetComponent<UnityEngine.UI.Slider>().value);
+        float volume = volumeSlider.GetComponent<UnityEngine.UI.Slider>().value;
+        
+        volControl.SetVolume(volume);
+        Debug.Log("SliderValue: " + volume);
+    }
+    private void SetDefaultVolume()
+    {
+        float volume = volumeSlider.GetComponent<UnityEngine.UI.Slider>().value;
+        if (PlayerPrefs.HasKey("Volume"))
+        {
+            volume = PlayerPrefs.GetFloat("Volume");
+        }
+        volumeSlider.GetComponent<UnityEngine.UI.Slider>().value = volume;
+        volControl.SetVolume(volume);
+        Debug.Log("SliderValue: " + volume);
     }
 
     public void ResetStageButton()
     {
         FindObjectOfType<UnitHandler>().ResetCurrentStage();
         
+    }
+
+    public void ReturnToMainMenuButton()
+    {
+        FindObjectOfType<SystemHandler>().LoadMainMenu();
     }
 }
 
@@ -62,6 +80,7 @@ public class VolumeControl
 
     public void SetVolume(float volume)
     {
+        PlayerPrefs.SetFloat("Volume", volume);
         if(!DashVolume) DashVolume = GameObject.FindObjectOfType<DashHandler>();
         DashVolume.volumeControl = volume;
         if (!CarVolume) CarVolume = GameObject.FindObjectOfType<UnityStandardAssets.Vehicles.Car.CarAudio>();

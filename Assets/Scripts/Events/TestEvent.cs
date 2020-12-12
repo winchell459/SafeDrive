@@ -34,7 +34,7 @@ public class TestEvent : MonoBehaviour
 
     // Update is called once per frame
     //Used to control sequence of events (initiates events in a certain order, activates or deactivates events)
-    bool notInitizlizedCheck = false;
+    bool notInitializedCheck = false;
     bool eventCompletedCheck = false;
     void Update()
     {
@@ -65,10 +65,10 @@ public class TestEvent : MonoBehaviour
                 handleEvents();
             }
         }
-        else if (!Initialized && !notInitizlizedCheck)
+        else if (!Initialized && !notInitializedCheck)
         {
             //Debuger.MyLog("TestEvent not Initialized: " + gameObject.name);
-            notInitizlizedCheck = true;
+            notInitializedCheck = true;
         }
         else if(!eventCompletedCheck)
         {
@@ -183,7 +183,7 @@ public class TestEvent : MonoBehaviour
     private void setupEvents()  //purpose to add carCollisionEvent to list of events
     {
         events = GetComponents<EventScript>();
-        carCollisionEvent = GameObject.FindGameObjectWithTag("Player").GetComponent<CollisionDetection>();
+        //carCollisionEvent = GameObject.FindGameObjectWithTag("Player").GetComponent<CollisionDetection>();
         
         //EventScript[] newEvents = new EventScript[events.Length + 1];
 
