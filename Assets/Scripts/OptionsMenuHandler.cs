@@ -12,10 +12,10 @@ public class OptionsMenuHandler : MonoBehaviour
     {
 
         SetDefaultVolume();
-        foreach (AudioSource source in GameObject.FindObjectsOfType<AudioSource>())
-        {
-            Debug.Log(source.gameObject.name + ": " + source.volume);
-        }
+        //foreach (AudioSource source in GameObject.FindObjectsOfType<AudioSource>())
+        //{
+        //    Debug.Log(source.gameObject.name + ": " + source.volume);
+        //}
     }
     public VolumeControl volControl;
     private bool optionsOpen;
@@ -77,6 +77,7 @@ public class VolumeControl
     public DashHandler DashVolume;
     public UnityStandardAssets.Vehicles.Car.CarAudio CarVolume;
     public GameObject Wheels;
+    public BackgroundAudioHandler BackgroundAudio;
 
     public void SetVolume(float volume)
     {
@@ -89,6 +90,11 @@ public class VolumeControl
         foreach (AudioSource source in Wheels.transform.GetComponentsInChildren<AudioSource>())
         {
             source.volume = volume;
+        }
+        if (!BackgroundAudio) BackgroundAudio = GameObject.FindObjectOfType<BackgroundAudioHandler>();
+        else
+        {
+            BackgroundAudio.ChangeVolume(volume);
         }
     }
 }

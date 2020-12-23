@@ -169,8 +169,11 @@ namespace UnityStandardAssets.Vehicles.Car
             if (handbrake > 0f)
             {
                 var hbTorque = handbrake*m_MaxHandbrakeTorque;
+                Debug.Log(hbTorque);
                 m_WheelColliders[2].brakeTorque = hbTorque;
                 m_WheelColliders[3].brakeTorque = hbTorque;
+                m_Rigidbody.velocity = m_Rigidbody.velocity - 3 * m_Rigidbody.velocity.normalized * Time.deltaTime;
+                if (CurrentSpeed < 0.6f) m_Rigidbody.velocity = Vector3.zero; //new Vector3(0,0,0)
             }
 
 
@@ -243,6 +246,7 @@ namespace UnityStandardAssets.Vehicles.Car
                 //  m_WheelColliders[i].motorTorque = -m_ReverseTorque*footbrake;
                 //}
                 m_WheelColliders[i].brakeTorque = m_BrakeTorque * footbrake;
+                if (footbrake > 0 && CurrentSpeed < 0.6f) m_Rigidbody.velocity = Vector3.zero;
             }
         }
 
