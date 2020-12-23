@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Question3
   m_EditorClassIdentifier: 
   MyQuestion: When should you turn the headlights on or off?
-  Description: 
+  Description: 'There are two headlight modes: low beams and high beams (brights).
+    One purpose of headlights is to see further during nighttime or low visibility.
+    A second purpose is to notify other drivers of your vehicle''s presence during
+    the aforementioned conditions.'
   Answers:
   - Must turn off high beams within 150 meters of an oncoming vehicle.
   - Low beams must be activated half-hour before the sun sets until half-hour after
