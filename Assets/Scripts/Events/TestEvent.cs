@@ -157,7 +157,7 @@ public class TestEvent : MonoBehaviour
         }
         card.Score = (int)score;
         card.Total = (int)total;
-        Debug.Log(transform.name + " score:" + card.Score + "total: " + card.Total);
+        //Debug.Log(transform.name + " score:" + card.Score + "total: " + card.Total);
         return card;
     }
 

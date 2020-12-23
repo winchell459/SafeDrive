@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Question1
   m_EditorClassIdentifier: 
   MyQuestion: What should you not do when making a right turn at an intersection?
-  Description: A brief explanation for what the player will be doing in the game
+  Description: Always give a signal that you're turning before you act. Make sure
+    not to collide with anything or anyone when turning. For right turns, when the
+    light is red, you should stop for 3 seconds before you turn; if it's green, you
+    can turn without stopping.
   Answers:
   - Changing lanes when turning
   - Come to a complete stop

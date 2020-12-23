@@ -1,0 +1,305 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5614131495280670248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5614131495280670245}
+  - component: {fileID: 5614131495280670247}
+  - component: {fileID: 5614131495280670246}
+  m_Layer: 0
+  m_Name: HeadlightTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5614131495280670245
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614131495280670248}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 282.3513, y: 103.79836, z: 370.25287}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5614131496276070502}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5614131495280670247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614131495280670248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d71ea5cba4fda24392887e2f109d3f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  events:
+  - {fileID: 5614131495280670246}
+  carCollisionEvent: {fileID: 0}
+  NextEvents:
+  - {fileID: 5614131495883494904}
+  NextEvent: {fileID: 5614131495883494904}
+  PrevEvent: {fileID: 0}
+  Initialized: 0
+  CheckEngine: 0
+  EventCompleted: 0
+--- !u!114 &5614131495280670246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614131495280670248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2e82cfb15c3da4187dd1496fb65cde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Label: Turned off high beams
+  IncludeInScoreCard: 0
+  _pass: 0
+  _completed: 0
+  EventType: 1
+  Weight: 100
+  Dash: {fileID: 0}
+  TargetState: 2
+  LeewayTime: 2
+--- !u!1 &5614131495680032788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5614131495680033263}
+  - component: {fileID: 5614131495680032784}
+  - component: {fileID: 5614131495680032785}
+  - component: {fileID: 5614131495680032786}
+  - component: {fileID: 5614131495680032787}
+  m_Layer: 0
+  m_Name: HeadlightAreaInitializer(HL)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5614131495680033263
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614131495680032788}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 237.67, y: 104.23, z: 524.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5614131496276070502}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5614131495680032784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614131495680032788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2dd0e21d5d18014caa3614c678a6c46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Label: Event has not been labeled
+  IncludeInScoreCard: 0
+  _pass: 0
+  _completed: 0
+  EventType: 0
+  Weight: 0
+  notAreaDetector: 0
+  otherTag: Player
+  EnterPass: 1
+--- !u!114 &5614131495680032785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614131495680032788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c5a25981abc76c478e03f1460336aea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Label: Event has not been labeled
+  IncludeInScoreCard: 0
+  _pass: 0
+  _completed: 0
+  EventType: 8
+  Weight: 0
+  Car: {fileID: 0}
+--- !u!114 &5614131495680032786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614131495680032788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d71ea5cba4fda24392887e2f109d3f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  events: []
+  carCollisionEvent: {fileID: 0}
+  NextEvents: []
+  NextEvent: {fileID: 0}
+  PrevEvent: {fileID: 0}
+  Initialized: 1
+  CheckEngine: 0
+  EventCompleted: 0
+--- !u!65 &5614131495680032787
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614131495680032788}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 15, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &5614131495883494907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5614131495883494906}
+  - component: {fileID: 5614131495883494903}
+  - component: {fileID: 5614131495883494904}
+  - component: {fileID: 5614131495883494905}
+  m_Layer: 0
+  m_Name: HeadlightAreaFinalize
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5614131495883494906
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614131495883494907}
+  m_LocalRotation: {x: -0, y: -0.16835515, z: -0, w: 0.9857264}
+  m_LocalPosition: {x: 331.4, y: 100.99, z: 146.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5614131496276070502}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: -19.384, z: 0}
+--- !u!114 &5614131495883494903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614131495883494907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2dd0e21d5d18014caa3614c678a6c46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Label: Event has not been labeled
+  IncludeInScoreCard: 0
+  _pass: 0
+  _completed: 0
+  EventType: 0
+  Weight: 0
+  notAreaDetector: 0
+  otherTag: Player
+  EnterPass: 1
+--- !u!114 &5614131495883494904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614131495883494907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d71ea5cba4fda24392887e2f109d3f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  events:
+  - {fileID: 5614131495883494903}
+  carCollisionEvent: {fileID: 0}
+  NextEvents: []
+  NextEvent: {fileID: 0}
+  PrevEvent: {fileID: 0}
+  Initialized: 0
+  CheckEngine: 0
+  EventCompleted: 0
+--- !u!65 &5614131495883494905
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614131495883494907}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 15, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &5614131496276070503
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5614131496276070502}
+  m_Layer: 0
+  m_Name: HUnitEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5614131496276070502
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614131496276070503}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5614131495680033263}
+  - {fileID: 5614131495280670245}
+  - {fileID: 5614131495883494906}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

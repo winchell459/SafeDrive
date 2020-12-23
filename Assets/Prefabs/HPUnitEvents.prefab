@@ -1,0 +1,182 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5331683650596631496
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7166874813627818192}
+  m_Layer: 0
+  m_Name: HPUnitEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7166874813627818192
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5331683650596631496}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 291.90747, y: 140.75414, z: 655.3488}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6730807643866649744}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6730807643866649711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6730807643866649744}
+  - component: {fileID: 6730807643866649745}
+  - component: {fileID: 6730807643866649746}
+  - component: {fileID: 6730807643866649747}
+  - component: {fileID: 6730807643866649708}
+  - component: {fileID: 6730807643866649709}
+  - component: {fileID: 6730807643866649710}
+  m_Layer: 0
+  m_Name: EventTrigger(HP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6730807643866649744
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6730807643866649711}
+  m_LocalRotation: {x: -0.20301422, y: -0, z: -0, w: 0.9791758}
+  m_LocalPosition: {x: -47.40747, y: -31.254135, z: 102.45117}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7166874813627818192}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -23.427002, y: 0, z: 0}
+--- !u!114 &6730807643866649745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6730807643866649711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2dd0e21d5d18014caa3614c678a6c46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Label: Stopped Next to Curb
+  IncludeInScoreCard: 0
+  _pass: 0
+  _completed: 0
+  EventType: 0
+  Weight: 10
+  notAreaDetector: 0
+  otherTag: Player
+  EnterPass: 1
+--- !u!114 &6730807643866649746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6730807643866649711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bdc32e80764c144f88a3a4139c7ca3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Label: Applied Brakes
+  IncludeInScoreCard: 0
+  _pass: 0
+  _completed: 0
+  EventType: 0
+  Weight: 10
+  Dash: {fileID: 0}
+--- !u!114 &6730807643866649747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6730807643866649711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d71ea5cba4fda24392887e2f109d3f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  events: []
+  carCollisionEvent: {fileID: 0}
+  NextEvents: []
+  NextEvent: {fileID: 0}
+  PrevEvent: {fileID: 0}
+  Initialized: 1
+  CheckEngine: 1
+  EventCompleted: 0
+--- !u!114 &6730807643866649708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6730807643866649711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e726c95ca05764f9aea1db99ec703b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Label: Fully Stopped
+  IncludeInScoreCard: 0
+  _pass: 0
+  _completed: 0
+  EventType: 0
+  Weight: 50
+  Dash: {fileID: 0}
+  TargetVelocity: 0.1
+  TimeLimit: 1
+--- !u!114 &6730807643866649709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6730807643866649711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31908b42cab82c14fbaa9fdb841b1119, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Label: Turned Front Wheels
+  IncludeInScoreCard: 0
+  _pass: 0
+  _completed: 0
+  EventType: 0
+  Weight: 50
+  WheelTurnThreshold: 20
+--- !u!65 &6730807643866649710
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6730807643866649711}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 3, z: 50}
+  m_Center: {x: 0, y: 0, z: 0}

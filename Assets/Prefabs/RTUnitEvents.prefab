@@ -1,0 +1,475 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6095460287081081083
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6095460287081081082}
+  m_Layer: 0
+  m_Name: RTUnitEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6095460287081081082
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460287081081083}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6095460288179200297}
+  - {fileID: 6095460288143551621}
+  - {fileID: 6095460288595850043}
+  - {fileID: 6095460288620134988}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6095460288143551617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6095460288143551621}
+  - component: {fileID: 6095460288143551622}
+  - component: {fileID: 6095460288143551623}
+  - component: {fileID: 6095460288143551616}
+  m_Layer: 0
+  m_Name: RightTurnCorrect(RT)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6095460288143551621
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460288143551617}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 260.42, y: 102.06, z: 702.87}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6095460287081081082}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6095460288143551622
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460288143551617}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 3, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6095460288143551623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460288143551617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2dd0e21d5d18014caa3614c678a6c46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Label: Stayed in correct lane
+  IncludeInScoreCard: 0
+  _pass: 0
+  _completed: 0
+  EventType: 0
+  Weight: 50
+  notAreaDetector: 0
+  otherTag: Player
+  EnterPass: 1
+--- !u!114 &6095460288143551616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460288143551617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d71ea5cba4fda24392887e2f109d3f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  events:
+  - {fileID: 6095460288143551623}
+  carCollisionEvent: {fileID: 0}
+  NextEvents:
+  - {fileID: 6095460288620134979}
+  NextEvent: {fileID: 6095460288620134979}
+  PrevEvent: {fileID: 6095460288179200304}
+  Initialized: 0
+  CheckEngine: 0
+  EventCompleted: 0
+--- !u!1 &6095460288179200305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6095460288179200297}
+  - component: {fileID: 6095460288179200304}
+  - component: {fileID: 6095460288179200299}
+  - component: {fileID: 6095460288179200308}
+  - component: {fileID: 6095460288179200298}
+  - component: {fileID: 6095460288179200309}
+  - component: {fileID: 6095460288179200310}
+  - component: {fileID: 6095460288179200311}
+  m_Layer: 0
+  m_Name: StopLightCheck(RT)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6095460288179200297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460288179200305}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 244.06, y: 101.71, z: 692.22}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6095460287081081082}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6095460288179200304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460288179200305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d71ea5cba4fda24392887e2f109d3f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  events:
+  - {fileID: 6095460288179200299}
+  carCollisionEvent: {fileID: 0}
+  NextEvents:
+  - {fileID: 6095460288143551616}
+  - {fileID: 6095460288595849990}
+  NextEvent: {fileID: 0}
+  PrevEvent: {fileID: 0}
+  Initialized: 1
+  CheckEngine: 0
+  EventCompleted: 0
+--- !u!114 &6095460288179200299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460288179200305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2dd0e21d5d18014caa3614c678a6c46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Label: Event has not been labeled
+  IncludeInScoreCard: 0
+  _pass: 0
+  _completed: 0
+  EventType: 0
+  Weight: 0
+  notAreaDetector: 0
+  otherTag: Player
+  EnterPass: 1
+--- !u!114 &6095460288179200308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460288179200305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 145852f628371b2418ddaadc503030e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Label: Turned on right blinker
+  IncludeInScoreCard: 0
+  _pass: 0
+  _completed: 0
+  EventType: 7
+  Weight: 10
+  Indicator: 1
+--- !u!65 &6095460288179200298
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460288179200305}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12, y: 3, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6095460288179200309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460288179200305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e726c95ca05764f9aea1db99ec703b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Label: Stopped completely
+  IncludeInScoreCard: 0
+  _pass: 0
+  _completed: 0
+  EventType: 3
+  Weight: 10
+  Dash: {fileID: 0}
+  TargetVelocity: 0.01
+  TimeLimit: 1
+--- !u!114 &6095460288179200310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460288179200305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5cad0cfac3e39545907618a3e89fd30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Label: Looked both ways
+  IncludeInScoreCard: 0
+  _pass: 0
+  _completed: 0
+  EventType: 6
+  Weight: 20
+  TurnHeadThreshold: 15
+  head: {fileID: 0}
+--- !u!114 &6095460288179200311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460288179200305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41864f97d4de9b74a8cc5785da03b967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Label: Event has not been labeled
+  IncludeInScoreCard: 0
+  _pass: 0
+  _completed: 0
+  EventType: 8
+  Weight: 0
+  LightToTrigger: {fileID: 0}
+--- !u!1 &6095460288595849991
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6095460288595850043}
+  - component: {fileID: 6095460288595849988}
+  - component: {fileID: 6095460288595849989}
+  - component: {fileID: 6095460288595849990}
+  m_Layer: 0
+  m_Name: RightTurnFailure(RT)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6095460288595850043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460288595849991}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 260.42, y: 102.06, z: 709.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6095460287081081082}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6095460288595849988
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460288595849991}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 3, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6095460288595849989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460288595849991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2dd0e21d5d18014caa3614c678a6c46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Label: Stayed in correct lane
+  IncludeInScoreCard: 0
+  _pass: 1
+  _completed: 0
+  EventType: 0
+  Weight: 50
+  notAreaDetector: 0
+  otherTag: Player
+  EnterPass: 0
+--- !u!114 &6095460288595849990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460288595849991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d71ea5cba4fda24392887e2f109d3f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  events:
+  - {fileID: 6095460288595849989}
+  carCollisionEvent: {fileID: 0}
+  NextEvents:
+  - {fileID: 6095460288620134979}
+  NextEvent: {fileID: 6095460288620134979}
+  PrevEvent: {fileID: 6095460288179200304}
+  Initialized: 0
+  CheckEngine: 0
+  EventCompleted: 0
+--- !u!1 &6095460288620134989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6095460288620134988}
+  - component: {fileID: 6095460288620134977}
+  - component: {fileID: 6095460288620134978}
+  - component: {fileID: 6095460288620134979}
+  m_Layer: 0
+  m_Name: RightTurnFinalizer(RT)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6095460288620134988
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460288620134989}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 264.4, y: 102.06, z: 705.63}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6095460287081081082}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6095460288620134977
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460288620134989}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7, y: 3, z: 15}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6095460288620134978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460288620134989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2dd0e21d5d18014caa3614c678a6c46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Label: Event has not been labeled
+  IncludeInScoreCard: 0
+  _pass: 0
+  _completed: 0
+  EventType: 0
+  Weight: 0
+  notAreaDetector: 1
+  otherTag: Player
+  EnterPass: 1
+--- !u!114 &6095460288620134979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095460288620134989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d71ea5cba4fda24392887e2f109d3f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  events:
+  - {fileID: 6095460288620134978}
+  carCollisionEvent: {fileID: 0}
+  NextEvents: []
+  NextEvent: {fileID: 0}
+  PrevEvent: {fileID: 6095460288143551616}
+  Initialized: 0
+  CheckEngine: 0
+  EventCompleted: 0

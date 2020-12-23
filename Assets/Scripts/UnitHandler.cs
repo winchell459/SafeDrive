@@ -73,7 +73,7 @@ public class UnitHandler : MonoBehaviour  //UnitHandler accesses the MasterContr
                 TestEvent.ScoreCard card = PracticalTest.score;
                 float score = (float)card.Score / (float)card.Total;
                 bool passed = score > MC.PassingScore;
-                Debug.Log("Score/Total: " + score + " > " + MC.PassingScore);
+                //Debug.Log("Score/Total: " + score + " > " + MC.PassingScore);
                 ScorePanel.GetComponent<ScorePanelHandler>().DisplayScore(card, false, passed);
             }
         }
@@ -83,7 +83,7 @@ public class UnitHandler : MonoBehaviour  //UnitHandler accesses the MasterContr
     public void ContinueButton()
     {
         MC.NextStage();
-        Debug.Log("Continue Button Pressed");
+        //Debug.Log("Continue Button Pressed");
     }
 
     public void RetryButton()

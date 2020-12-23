@@ -155,7 +155,7 @@ namespace UnityStandardAssets.Vehicles.Car
             float angleRange = m_MaximumSteerAngle - m_MinimumSteeringAngle;
             float speedPercent = Mathf.Pow(10, -(CurrentSpeed / MaxSpeed)); // y = a * b^-x
             float angle = angleRange * speedPercent + m_MinimumSteeringAngle;
-            Debug.Log("steering angle: " + angle + " speedPercent: " + speedPercent);
+            //Debug.Log("steering angle: " + angle + " speedPercent: " + speedPercent);
             m_SteerAngle = steering * angle;//m_MaximumSteeringAngle;
             m_WheelColliders[0].steerAngle = m_SteerAngle;
             m_WheelColliders[1].steerAngle = m_SteerAngle;
@@ -171,6 +171,8 @@ namespace UnityStandardAssets.Vehicles.Car
                 var hbTorque = handbrake*m_MaxHandbrakeTorque;
                 m_WheelColliders[2].brakeTorque = hbTorque;
                 m_WheelColliders[3].brakeTorque = hbTorque;
+                m_Rigidbody.velocity = m_Rigidbody.velocity - 3 * m_Rigidbody.velocity.normalized * Time.deltaTime;
+                if (CurrentSpeed < 0.6f) m_Rigidbody.velocity = Vector3.zero; //new Vector3(0,0,0)
             }
 
 
@@ -186,6 +188,7 @@ namespace UnityStandardAssets.Vehicles.Car
         private void CapSpeed()
         {
             float speed = m_Rigidbody.velocity.magnitude;
+            //Debug.Log("Speed: " + speed * 2.23693629f);
             switch (m_SpeedType)
             {
                 case SpeedType.MPH:
@@ -243,6 +246,7 @@ namespace UnityStandardAssets.Vehicles.Car
                 //  m_WheelColliders[i].motorTorque = -m_ReverseTorque*footbrake;
                 //}
                 m_WheelColliders[i].brakeTorque = m_BrakeTorque * footbrake;
+                if (footbrake > 0 && CurrentSpeed < 0.6f) m_Rigidbody.velocity = Vector3.zero;
             }
         }
 

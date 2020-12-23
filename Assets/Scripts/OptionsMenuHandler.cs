@@ -14,7 +14,7 @@ public class OptionsMenuHandler : MonoBehaviour
         SetDefaultVolume();
         foreach (AudioSource source in GameObject.FindObjectsOfType<AudioSource>())
         {
-            Debug.Log(source.gameObject.name + ": " + source.volume);
+            //Debug.Log(source.gameObject.name + ": " + source.volume);
         }
     }
     public VolumeControl volControl;
@@ -94,6 +94,7 @@ public class VolumeControl
     public DashHandler DashVolume;
     public UnityStandardAssets.Vehicles.Car.CarAudio CarVolume;
     public GameObject Wheels;
+    public BackgroundAudioHandler BackgroundAudio;
 
     public void SetVolume(float volume)
     {
@@ -107,6 +108,8 @@ public class VolumeControl
         {
             source.volume = volume;
         }
+        if (!BackgroundAudio) BackgroundAudio = GameObject.FindObjectOfType<BackgroundAudioHandler>();
+        BackgroundAudio.ChangeBackgroundVolume(volume);
     }
 }
 
