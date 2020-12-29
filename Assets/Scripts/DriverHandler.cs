@@ -8,6 +8,21 @@ public class DriverHandler : MonoBehaviour
     public UnityStandardAssets.Vehicles.Car.CarUserControl Controller;
     public DashHandler Dash;
     public MasterControl MC;
+    private bool touchControls;
+    public GameObject TKCCanvas;
+
+    private void Awake()
+    {
+        if (MC.TouchControls == true)
+        {
+            touchControls = true;
+            Dash.SetupTouchControl();
+        }
+        else
+        {
+            TKCCanvas.SetActive(false);
+        }
+    }
 
     public float GetVehicleSpeed()
     {

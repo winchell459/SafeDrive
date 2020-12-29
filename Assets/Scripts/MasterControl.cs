@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 [CreateAssetMenu(fileName = "MasterControl", menuName = "ScriptableObjects/MasterControl")]
 public class MasterControl : ScriptableObject
 {
+    public bool TouchControls;
     public Units[] Units;
     public string Credits = "Credits";
 

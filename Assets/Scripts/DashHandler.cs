@@ -10,6 +10,7 @@ using UnityEngine.UI;
 
 public class DashHandler : MonoBehaviour
 {
+    private bool touchControls;
     public DriverHandler Driver;
     public Text SpeedometerText;
     public Text ClockText;
@@ -52,6 +53,14 @@ public class DashHandler : MonoBehaviour
     {
         //Debug.Log(Driver.GetSteeringAngle());
         handleSteeringWheel();
+    }
+
+    public void SetupTouchControl()
+    {
+        HandbrakeSymbol.transform.parent.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 1);
+        HandbrakeSymbol.transform.parent.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 1);
+        HandbrakeSymbol.transform.parent.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 1);
+        touchControls = true;
     }
 
     private void handleEngineToggle()
@@ -229,11 +238,11 @@ public class DashHandler : MonoBehaviour
         {
             if (Driver.ToggleEngine()) //bool values when not defined explicitly are by default true
             {
-                IgnitionButton.transform.GetChild(0).GetComponent<Text>().text = "Engine On";
+                IgnitionButton.transform.GetChild(0).GetComponent<Text>().text = "On";
             }
             else
             {
-                IgnitionButton.transform.GetChild(0).GetComponent<Text>().text = "Engine Off";
+                IgnitionButton.transform.GetChild(0).GetComponent<Text>().text = "Off";
             }
         }
     }
