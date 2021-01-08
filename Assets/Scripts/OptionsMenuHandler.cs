@@ -20,6 +20,11 @@ public class OptionsMenuHandler : MonoBehaviour
     public VolumeControl volControl;
     private bool optionsOpen;
 
+    public void SetupTouchControls()
+    {
+        OptionsPanel.GetComponent<RectTransform>().localPosition = new Vector3(400, 235, 0);
+    }
+
     public void ToggleOptionPanel()
     {
         OptionsButton.SetActive(OptionsPanel.activeSelf);

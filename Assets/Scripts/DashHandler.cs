@@ -1,12 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Globalization;
-using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
+using TouchControlsKit;
 
 public class DashHandler : MonoBehaviour
 {
@@ -86,8 +82,38 @@ public class DashHandler : MonoBehaviour
 
     }
 
+    private bool lightingUp = true;
     private void handleLights()
     {
+        if (touchControls && TCKInput.GetAction("LightBtn", EActionEvent.Down))
+        {
+            if (lightingUp)
+            {
+                if(LowBeams.activeSelf)
+                {
+                    LowBeams.SetActive(false);
+                    HighBeams.SetActive(true);
+                    lightingUp = false;
+                }
+                else
+                {
+                    LowBeams.SetActive(true);
+                }
+            }
+            else
+            {
+                if (HighBeams.activeSelf)
+                {
+                    LowBeams.SetActive(true);
+                    HighBeams.SetActive(false);
+                }
+                else
+                {
+                    LowBeams.SetActive(false);
+                    lightingUp = true;
+                }
+            }
+        }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if(LowBeams.activeSelf || HighBeams.activeSelf)
@@ -131,6 +157,7 @@ public class DashHandler : MonoBehaviour
         else if(GetHandbrake())
         {
             float h = Input.GetAxis("Horizontal");
+            if (touchControls) h = 5*TCKInput.GetAxis("Joystick").x;
             Vector3 currentAngles = SteeringWheelImage.localEulerAngles;
             float angle = currentAngles.z -h * rotationRate * Time.deltaTime;
             //-25 <-> 25

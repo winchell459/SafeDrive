@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TouchControlsKit;
 
 public class DriverHandler : MonoBehaviour
 {
@@ -9,18 +10,24 @@ public class DriverHandler : MonoBehaviour
     public DashHandler Dash;
     public MasterControl MC;
     private bool touchControls;
-    public GameObject TKCCanvas;
+    public GameObject TCKCanvas;
 
+    public OptionsMenuHandler OMH;
+
+    public bool isJoystickVelocity;
     private void Awake()
     {
         if (MC.TouchControls == true)
         {
             touchControls = true;
+            Controller.TouchControls = true;
             Dash.SetupTouchControl();
+            OMH.SetupTouchControls();
         }
         else
         {
-            TKCCanvas.SetActive(false);
+            TCKCanvas.SetActive(false);
+            Controller.TouchControls = false;
         }
     }
 
@@ -44,22 +51,39 @@ public class DriverHandler : MonoBehaviour
 
     private void HandleDriverInput()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (touchControls)
+        {
+            if (isJoystickVelocity)
+            {
+                Controller.joystick = TCKInput.GetAxis("Joystick");
+            }
+            else
+            {
+                float steering = TCKInput.GetAxis("Joystick").x;
+                float accel = TCKInput.GetAction("AccelBtn", EActionEvent.Press) ? 1 : 0;
+                float reverse = TCKInput.GetAction("ReverseBtn", EActionEvent.Press) ? -1 : 0;
+
+                Controller.joystick = new Vector2(steering, accel + reverse);
+            }
+            Controller.brake = TCKInput.GetAction("BrakeBtn", EActionEvent.Press) ? -1 : 0;
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift) || (touchControls && TCKInput.GetAction("LBlinkerBtn", EActionEvent.Down)))
         {
             Dash.ToggleIndicator(DashHandler.Indicator.left);
         }
 
-        if (Input.GetKeyDown(KeyCode.RightShift))
+        if (Input.GetKeyDown(KeyCode.RightShift) || (touchControls && TCKInput.GetAction("RBlinkerBtn", EActionEvent.Down)))
         {
             Dash.ToggleIndicator(DashHandler.Indicator.right);   
         }
 
-        if(!handbrakeDown && Input.GetAxis("Jump") > 0.1f)
+        if(!handbrakeDown && Input.GetAxis("Jump") > 0.1f || (touchControls && TCKInput.GetAction("HBrakeBtn", EActionEvent.Down)))
         {
             handbrakeDown = true;
             Dash.SetHandbrake(!Dash.GetHandbrake());
             Controller.HandbrakeSet = Dash.GetHandbrake();
-        }else if(handbrakeDown && Input.GetAxis("Jump") < 0.1f){
+        }else if(handbrakeDown && Input.GetAxis("Jump") < 0.1f || (touchControls && TCKInput.GetAction("HBrakeBtn", EActionEvent.Down)))
+        {
             handbrakeDown = false;
         }
     }

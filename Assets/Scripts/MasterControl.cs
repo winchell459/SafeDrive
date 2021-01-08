@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 [CreateAssetMenu(fileName = "MasterControl", menuName = "ScriptableObjects/MasterControl")]
 public class MasterControl : ScriptableObject
 {
+    public static MasterControl MC;
+
     public bool TouchControls;
     public Units[] Units;
     public string Credits = "Credits";
@@ -30,6 +32,12 @@ public class MasterControl : ScriptableObject
     {
         get { return unitIndex < Units.Length ? Units[unitIndex].GetPaused(CurrentStage) : false; }//return (if this is true) ? (then return this) : (else return this);
         // set {; }
+    }
+
+    private void OnEnable()
+    {
+        MC = this;
+        Debug.Log("MC setup");
     }
 
     public bool SceneLoading;

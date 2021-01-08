@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
-//using TouchControlKit;
+//using TouchControlsKit;
 
 namespace UnityStandardAssets.Vehicles.Car
 {
@@ -12,6 +12,8 @@ namespace UnityStandardAssets.Vehicles.Car
         public bool HandbrakeSet = false;
         public bool ControlsPaused = true;
         public bool TouchControls;
+        public Vector2 joystick;
+        public float brake;
 
         private void Awake()
         {
@@ -27,10 +29,13 @@ namespace UnityStandardAssets.Vehicles.Car
             float v = CrossPlatformInputManager.GetAxis("Vertical");
             float s = Input.GetKey(KeyCode.B) ? -1 : 0;
             float b = Input.GetKey(KeyCode.B) ? -1 : 0;
-            //if (TouchControls)
-            //{
-            //    Vector2 joystick = TCKInput.GetAxis("Joystick");
-            //}
+            if (TouchControls)
+            {
+                //Vector2 joystick = TCKInput.GetAxis("Joystick");
+                h = joystick.x;
+                v = joystick.y;
+                b = brake;
+            }
             if (ControlsPaused)
             {
                 h = 0;

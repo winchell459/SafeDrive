@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Units_04
   StageScenes:
-  - SceneName: SBUnitMap
+  - SceneName: SB1
     MyStage: 0
     Pause: 1
-  - SceneName: SBUnitMap
+  - SceneName: SB1
     MyStage: 2
     Pause: 0
-  - SceneName: SBUnitMap
+  - SceneName: SB1
     MyStage: 4
     Pause: 1
-  - SceneName: SBUnitMap
+  - SceneName: SB1
     MyStage: 6
     Pause: 0
   PassingScore: 0.7
