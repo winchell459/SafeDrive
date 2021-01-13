@@ -15,7 +15,7 @@ MonoBehaviour:
   MyQuestion: What should you do when parking downhill with a curb?
   Description: Orient the car wheels in a way that will have the car roll into the
     curb if the brakes aren't applied; also make sure to turn off the engine after
-    parking
+    parking.
   Answers:
   - Turn front wheels away from the right curb
   - Turn front wheels toward the right curb

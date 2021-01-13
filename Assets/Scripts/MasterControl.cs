@@ -49,7 +49,7 @@ public class MasterControl : ScriptableObject
     }
     public int unlockedUnit = 0;
 
-    public void UnlockMaxUnit()
+    public void UnlockMaxUnit() //sets currently unlocked units in the main menu
     {
         //unlockedUnit = Mathf.Max(unlockedUnit, unitIndex);
         if (unlockedUnit < unitIndex)
@@ -57,7 +57,7 @@ public class MasterControl : ScriptableObject
             unlockedUnit = unitIndex;
         }
     }
-    public void StartNextUnit()
+    public void StartNextUnit() //moves on to next unit or credits depending on the current unit
     {
         unitIndex += 1;
         if(unitIndex < Units.Length)

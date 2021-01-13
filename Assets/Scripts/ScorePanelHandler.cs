@@ -24,11 +24,8 @@ public class ScorePanelHandler : MonoBehaviour
         Labels.text = scoreCard.Labels;
         Values.text = scoreCard.Values;
 
-        if (pass)
-        {
-            Labels.text += "\n Total";
-            Values.text += "\n" + scoreCard.Score + "/" + scoreCard.Total;
-        }
+        Labels.text += "\n Total";
+        Values.text += "\n" + scoreCard.Score + "/" + scoreCard.Total;
 
         if(!isPretest && !pass)
         {

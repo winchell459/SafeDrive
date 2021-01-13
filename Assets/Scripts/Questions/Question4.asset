@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyQuestion: When must you stop if you see a school bus on a road with two lanes
     travelling in opposite directions?
-  Description: 
+  Description: Make a stop behind the school bus until its lights stop flashing.
   Answers:
   - When the school bus stops in front and extends flashing stop sign
   - Only if children are crossing
