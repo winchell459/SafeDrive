@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(1))
+        if (!isTouchControlled && Input.GetMouseButton(1))
         {
             Cursor.lockState = CursorLockMode.Locked;
             yaw += YawSpeed * Input.GetAxis("Mouse X");
