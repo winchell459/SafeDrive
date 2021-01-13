@@ -42,7 +42,7 @@ namespace UnityStandardAssets.Vehicles.Car
                 v = 0;
                 b = -1;
             }
-#if !MOBILE_INPUT
+//#if !MOBILE_INPUT
             //float handbrake = CrossPlatformInputManager.GetAxis("Jump");
             float handbrake = 0;
             if (HandbrakeSet)
@@ -51,9 +51,9 @@ namespace UnityStandardAssets.Vehicles.Car
                 handbrake = 1;
             }
             m_Car.Move(h, v, s, b, handbrake);
-#else
-            m_Car.Move(h, v, v, 0f);
-#endif
+//#else
+            //m_Car.Move(h, v, v, 0f);
+//#endif
         }
     }
 }

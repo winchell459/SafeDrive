@@ -22,7 +22,7 @@ public class DriverHandler : MonoBehaviour
             touchControls = true;
             Controller.TouchControls = true;
             Dash.SetupTouchControl();
-            OMH.SetupTouchControls();
+            //OMH.SetupTouchControls();
         }
         else
         {

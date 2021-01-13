@@ -5,6 +5,8 @@ using UnityEngine;
 public class OptionsMenuHandler : MonoBehaviour
 {
     public GameObject OptionsPanel;
+    public GameObject OptionsPanelTouch;
+    public GameObject OptionsPanelNonTouch;
     public GameObject CheatSheet;
     public GameObject volumeSlider;
     public GameObject OptionsButton;
@@ -12,17 +14,22 @@ public class OptionsMenuHandler : MonoBehaviour
     public void Start()
     {
         SetDefaultVolume();
-        foreach (AudioSource source in GameObject.FindObjectsOfType<AudioSource>())
-        {
-            //Debug.Log(source.gameObject.name + ": " + source.volume);
-        }
+        SetupTouchControls();
+        //foreach (AudioSource source in GameObject.FindObjectsOfType<AudioSource>())
+        //{
+        //    //Debug.Log(source.gameObject.name + ": " + source.volume);
+        //}
     }
     public VolumeControl volControl;
     private bool optionsOpen;
 
     public void SetupTouchControls()
     {
-        OptionsPanel.GetComponent<RectTransform>().localPosition = new Vector3(400, 235, 0);
+        //OptionsPanel.GetComponent<RectTransform>().localPosition = new Vector3(400, 235, 0);
+        if (MasterControl.MC.TouchControls)
+            OptionsPanel = OptionsPanelTouch;
+        else
+            OptionsPanel = OptionsPanelNonTouch;
     }
 
     public void ToggleOptionPanel()

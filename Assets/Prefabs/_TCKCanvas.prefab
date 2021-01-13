@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -18}
+  m_AnchoredPosition: {x: 5, y: -22}
   m_SizeDelta: {x: 170, y: 94.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8443553245321065236
@@ -66,7 +66,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 45
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 4
@@ -247,7 +247,7 @@ MonoBehaviour:
   updateMode: 0
   baseRect: {fileID: 4538084065441096467}
   baseImage: {fileID: 6051264012373502809}
-  identifier: jumpBtn
+  identifier: BrakeBtn
   baseImageColor:
     serializedVersion: 2
     rgba: 2785017855
@@ -429,7 +429,7 @@ MonoBehaviour:
   updateMode: 0
   baseRect: {fileID: 683535177770582652}
   baseImage: {fileID: 4089895407158977394}
-  identifier: jumpBtn
+  identifier: HBrakeBtn
   baseImageColor:
     serializedVersion: 2
     rgba: 2785017855
@@ -476,11 +476,11 @@ RectTransform:
   m_Father: {fileID: 5528399288995071375}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -1624, y: 767}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 231, y: 671}
   m_SizeDelta: {x: 170, y: 170}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!222 &6282000121313653196
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -533,7 +533,7 @@ MonoBehaviour:
   updateMode: 0
   baseRect: {fileID: 5876010893008439475}
   baseImage: {fileID: 2458491821451741225}
-  identifier: jumpBtn
+  identifier: LightBtn
   baseImageColor:
     serializedVersion: 2
     rgba: 2785017855
@@ -580,11 +580,11 @@ RectTransform:
   m_Father: {fileID: 5528399288995071375}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -1814, y: 767}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 50, y: 673}
   m_SizeDelta: {x: 170, y: 170}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!222 &9054949737351445545
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -637,7 +637,7 @@ MonoBehaviour:
   updateMode: 0
   baseRect: {fileID: 6457680265788384200}
   baseImage: {fileID: 3612756922312483176}
-  identifier: jumpBtn
+  identifier: LBlinkerBtn
   baseImageColor:
     serializedVersion: 2
     rgba: 2785017855
@@ -755,7 +755,7 @@ MonoBehaviour:
     enabled: 1
     inverse: 0
   axisY:
-    enabled: 1
+    enabled: 0
     inverse: 0
   showTouchZone: 1
   joystickImage: {fileID: 5528399289387903706}
@@ -1691,7 +1691,7 @@ MonoBehaviour:
   updateMode: 0
   baseRect: {fileID: 767028885714573445}
   baseImage: {fileID: 3432712341159803886}
-  identifier: jumpBtn
+  identifier: RBlinkerBtn
   baseImageColor:
     serializedVersion: 2
     rgba: 2785017855
