@@ -59,6 +59,8 @@ namespace UnityStandardAssets.Vehicles.Car
 
         public GameObject Wheels { get { return m_WheelColliders[0].transform.parent.gameObject; } }
 
+        public float TurnFuncBase = 10;
+
         // Use this for initialization
         private void Start()
         {
@@ -153,7 +155,7 @@ namespace UnityStandardAssets.Vehicles.Car
 
             //Adjust steering angle based on CurrentSpeed -> max angle decreases as speed decreases
             float angleRange = m_MaximumSteerAngle - m_MinimumSteeringAngle;
-            float speedPercent = Mathf.Pow(10, -(CurrentSpeed / MaxSpeed)); // y = a * b^-x
+            float speedPercent = Mathf.Pow(TurnFuncBase, -(CurrentSpeed / MaxSpeed)); // y = a * b^-x
             float angle = angleRange * speedPercent + m_MinimumSteeringAngle;
             //Debug.Log("steering angle: " + angle + " speedPercent: " + speedPercent);
             m_SteerAngle = steering * angle;//m_MaximumSteeringAngle;

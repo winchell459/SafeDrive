@@ -23,6 +23,11 @@ public class HeadlightDetection : EventScript
 
     private bool initialized = false;
 
+    public Transform AICar;
+    public Transform Player;
+    public float LeewayDistance = 50;
+    public bool isInRange;
+
     public override void Initialize()
     {
         Dash = FindObjectOfType<DashHandler>();
@@ -34,45 +39,97 @@ public class HeadlightDetection : EventScript
     {
         if(!Completed && initialized)
         {
-            if(LeewayTime + timerStart < Time.fixedTime)
+            if (!isInRange && Vector3.Distance(Player.position, AICar.position) < 50)
             {
-                Completed = true;
-                Pass = false;
+                isInRange = true;
             }
-            else
+            if (isInRange)
             {
-                if(TargetState == LightStates.Off)
+                Vector3 displacement1 = Player.position - AICar.position;
+                float dotP1 = Vector3.Dot(displacement1, AICar.forward);
+                Vector3 displacement2 = AICar.position - Player.position;
+                float dotP2 = Vector3.Dot(displacement2, Player.forward);//Player.forward = velocity
+                if (dotP1 < 0 && dotP2 < 0)
                 {
-                    if(!Dash.LowBeamsOn() && !Dash.HighBeamsOn())
+                    if (TargetState == LightStates.Off)
                     {
-                        Completed = true;
-                        Pass = true;
-                    }
-                }else if (TargetState == LightStates.On)
-                {
-                    if (Dash.LowBeamsOn() || Dash.HighBeamsOn())
-                    {
+                        if (!Dash.LowBeamsOn() && !Dash.HighBeamsOn())
+                        {
                             Completed = true;
                             Pass = true;
+                        }
                     }
-                }
-                else if (TargetState == LightStates.LowBeamsOn)
-                {
-                    if (Dash.LowBeamsOn())
+                    else if (TargetState == LightStates.On)
+                    {
+                        if (Dash.LowBeamsOn() || Dash.HighBeamsOn())
+                        {
+                            Completed = true;
+                            Pass = true;
+                        }
+                    }
+                    else if (TargetState == LightStates.LowBeamsOn)
+                    {
+                        if (Dash.LowBeamsOn())
+                        {
+                            Completed = true;
+                            Pass = true;
+                        }
+                    }
+                    else if (TargetState == LightStates.HighBeamsOff)
+                    {
+                        if (!Dash.HighBeamsOn())
+                        {
+                            Completed = true;
+                            Pass = true;
+                        }
+                    }
+                    else
                     {
                         Completed = true;
-                        Pass = true;
-                    }
-                }
-                else if (TargetState == LightStates.HighBeamsOff)
-                {
-                    if (!Dash.HighBeamsOn())
-                    {
-                        Completed = true;
-                        Pass = true;
+                        Pass = false;
                     }
                 }
             }
+            Debug.Log("isInRange: " + isInRange);
+        //    if(LeewayTime + timerStart < Time.fixedTime)
+        //    {
+        //        Completed = true;
+        //        Pass = false;
+        //    }
+        //    else
+        //    {
+        //        if(TargetState == LightStates.Off)
+        //        {
+        //            if(!Dash.LowBeamsOn() && !Dash.HighBeamsOn())
+        //            {
+        //                Completed = true;
+        //                Pass = true;
+        //            }
+        //        }else if (TargetState == LightStates.On)
+        //        {
+        //            if (Dash.LowBeamsOn() || Dash.HighBeamsOn())
+        //            {
+        //                    Completed = true;
+        //                    Pass = true;
+        //            }
+        //        }
+        //        else if (TargetState == LightStates.LowBeamsOn)
+        //        {
+        //            if (Dash.LowBeamsOn())
+        //            {
+        //                Completed = true;
+        //                Pass = true;
+        //            }
+        //        }
+        //        else if (TargetState == LightStates.HighBeamsOff)
+        //        {
+        //            if (!Dash.HighBeamsOn())
+        //            {
+        //                Completed = true;
+        //                Pass = true;
+        //            }
+        //        }
+        //    }
         }
     }
 }

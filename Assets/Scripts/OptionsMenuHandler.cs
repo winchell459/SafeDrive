@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TouchControlsKit;
+using UnityStandardAssets.Vehicles.Car;
 
 public class OptionsMenuHandler : MonoBehaviour
 {
@@ -9,12 +12,20 @@ public class OptionsMenuHandler : MonoBehaviour
     public GameObject OptionsPanelNonTouch;
     public GameObject CheatSheet;
     public GameObject volumeSlider;
+    public Slider VolumeConsoleSlider;
+    public Slider VolumeTouchSlider;
     public GameObject OptionsButton;
 
+    public Slider MobileSensitivitySlider;
+    public Slider ConsoleSensitivitySlider;
+    [Range(1, 5)]
+    public float MobileSensitivityDefault = 1;
+    [Range(10, 100)]
+    public float ConsoleSensitivityDefault = 10;
     public void Start()
     {
-        SetDefaultVolume();
         SetupTouchControls();
+        SetDefaultVolume();
         //foreach (AudioSource source in GameObject.FindObjectsOfType<AudioSource>())
         //{
         //    //Debug.Log(source.gameObject.name + ": " + source.volume);
@@ -27,9 +38,21 @@ public class OptionsMenuHandler : MonoBehaviour
     {
         //OptionsPanel.GetComponent<RectTransform>().localPosition = new Vector3(400, 235, 0);
         if (MasterControl.MC.TouchControls)
+        {
             OptionsPanel = OptionsPanelTouch;
+            volumeSlider = VolumeTouchSlider.gameObject;
+            float value = PlayerPrefs.GetFloat("Turn Sensitivity", MobileSensitivityDefault);
+            SetMobileSensitivity(value);
+            MobileSensitivitySlider.value = value;
+        }
         else
+        {
             OptionsPanel = OptionsPanelNonTouch;
+            volumeSlider = VolumeConsoleSlider.gameObject;
+            float value = PlayerPrefs.GetFloat("Turn Sensitivity", ConsoleSensitivityDefault);
+            SetConsoleSensitivity(value);
+            ConsoleSensitivitySlider.value = value;
+        }
     }
 
     public void ToggleOptionPanel()
@@ -79,7 +102,19 @@ public class OptionsMenuHandler : MonoBehaviour
     {
         float volume = volumeSlider.GetComponent<UnityEngine.UI.Slider>().value;
         volControl.SetVolume(volume);
-        Debug.Log("SliderValue: " + volume);
+        //Debug.Log("SliderValue: " + volume);
+    }
+    
+    public void SetMobileSensitivity(float value)
+    {
+        PlayerPrefs.SetFloat("Turn Sensitivity", value);
+        FindObjectOfType<TCKJoystick>().sensitivity = value;
+    }
+
+    public void SetConsoleSensitivity(float value)
+    {
+        PlayerPrefs.SetFloat("Turn Sensitivity", value);
+        GameObject.FindWithTag("Player").GetComponent<CarController>().TurnFuncBase = value;
     }
 
     public void SetDefaultVolume()

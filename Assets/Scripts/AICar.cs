@@ -7,7 +7,7 @@ public class AICar : MonoBehaviour
 {
     private Transform[] Waypoints { get { return Markers.Markers; } }
     public AIMarkers Markers;
-    private int waypointIndex = 0;
+    public int waypointIndex = 0;
     private Vector3 direction;
     public GameObject FrontLeftWheel, FrontRightWheel, RearLeftWheel, RearRightWheel;
     public float WheelRadius = 0.0125f;
