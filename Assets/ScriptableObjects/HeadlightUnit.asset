@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Unit_03
   StageScenes:
-  - SceneName: H1
+  - SceneName: HL1
     MyStage: 0
     Pause: 1
-  - SceneName: H1
+  - SceneName: HL1
     MyStage: 2
     Pause: 0
-  - SceneName: H1
+  - SceneName: HL1
     MyStage: 4
     Pause: 1
-  - SceneName: H1
+  - SceneName: HL1
     MyStage: 6
     Pause: 0
   PassingScore: 0.7

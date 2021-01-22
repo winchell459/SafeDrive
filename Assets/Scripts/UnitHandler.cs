@@ -8,6 +8,7 @@ public class UnitHandler : MonoBehaviour  //UnitHandler accesses the MasterContr
     public GameObject StartPromptPanel, PretestPromptPanel, ScorePanel;
     public QuestionHandler UnitQuestion;
     public TestEvent Pretest, PracticalTest;
+    public TestEvent PretestInitializer, PracticalTestInitializer;
 
     public Marker PretestMarkers, PracticalMarkers;
 
@@ -38,6 +39,9 @@ public class UnitHandler : MonoBehaviour  //UnitHandler accesses the MasterContr
             if(Pretest && Pretest.EventCompleted)
             {
                 MC.NextStage();
+            } else if (Pretest && !PretestInitializer.Initialized)
+            {
+                PretestInitializer.Initialized = true;
             }
         }
         else if (MC.CurrentStage == MasterControl.UnitStages.PretestPause)
@@ -64,6 +68,10 @@ public class UnitHandler : MonoBehaviour  //UnitHandler accesses the MasterContr
         {
             if (PracticalMarkers && !PracticalMarkers.MarkerActive) PracticalMarkers.MarkerActive = true;
             if (PracticalTest && PracticalTest.EventCompleted) MC.NextStage();
+            else if (PracticalTest && !PracticalTestInitializer.Initialized)
+            {
+                PracticalTestInitializer.Initialized = true;
+            }
         }
         else if (MC.CurrentStage == MasterControl.UnitStages.Score)
         {
