@@ -39,7 +39,7 @@ public class UnitHandler : MonoBehaviour  //UnitHandler accesses the MasterContr
             if(Pretest && Pretest.EventCompleted)
             {
                 MC.NextStage();
-            } else if (Pretest && !PretestInitializer.Initialized)
+            } else if (PretestInitializer && !PretestInitializer.Initialized)
             {
                 PretestInitializer.Initialized = true;
             }
@@ -68,7 +68,7 @@ public class UnitHandler : MonoBehaviour  //UnitHandler accesses the MasterContr
         {
             if (PracticalMarkers && !PracticalMarkers.MarkerActive) PracticalMarkers.MarkerActive = true;
             if (PracticalTest && PracticalTest.EventCompleted) MC.NextStage();
-            else if (PracticalTest && !PracticalTestInitializer.Initialized)
+            else if (PracticalTestInitializer && !PracticalTestInitializer.Initialized)
             {
                 PracticalTestInitializer.Initialized = true;
             }

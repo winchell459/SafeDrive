@@ -20,6 +20,10 @@ public class AICar : MonoBehaviour
     private Vector3 velocityPos;
     private float wheelAngle;
 
+    public Transform RearCheck, FrontCheck;
+    public float RotateRate = 1;
+    public LayerMask RoadMask;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +34,11 @@ public class AICar : MonoBehaviour
         player = FindObjectOfType<UnityStandardAssets.Vehicles.Car.CarController>().gameObject;
     }
 
+    void FixedUpdate()
+    {
+       // print("FixedUpdate");
+        
+    }
     // Update is called once per frame
     void Update()
     {
@@ -53,6 +62,8 @@ public class AICar : MonoBehaviour
             //car.Move(90 / angle, 0, 0, 0, 0);
         }
 
+        
+
         //calc the wheel angular velocity
         Vector3 displacement = transform.position - velocityPos;
         //dot product gets the velocity in the forward direction of vehicle
@@ -71,6 +82,47 @@ public class AICar : MonoBehaviour
         //car.Move(90 / angle, 0, 0, 0, 0);
         //Debug.Log(waypointIndex); still a problem (runtime error)
         direction = transform.forward;
+
+        //CheckForGround();
+    }
+
+    
+
+    private void CheckForGround()
+    {
+        float rearHeight = 1000000;
+        RaycastHit hit1;
+        //Physics.Raycast()
+        if(Physics.Raycast(RearCheck.position, -transform.up, out hit1, 10000, RoadMask ))
+        {
+            rearHeight = hit1.distance;
+        }
+
+        float frontHeight = 1000000;
+        RaycastHit hit2;
+        if (Physics.Raycast(FrontCheck.position, -transform.up, out hit2, 10000, RoadMask))
+        {
+            frontHeight = hit2.distance;
+        }
+
+        float z = Vector3.Distance(RearCheck.position, FrontCheck.position);
+
+        
+        //if (rearHeight > frontHeight)
+        //{
+        //    //transform.localEulerAngles = transform.localEulerAngles + new Vector3(-RotateRate, 0, 0);
+
+        //}
+        //else if (rearHeight < frontHeight)
+        //{
+        //    //transform.localEulerAngles = transform.localEulerAngles + new Vector3(RotateRate, 0, 0);
+        //}
+
+        float theta = -Mathf.Atan(Mathf.Abs(rearHeight - frontHeight)) * 180 / 3.14f;
+        print(frontHeight + " " + rearHeight + " -> " + theta + " " + transform.localEulerAngles.x);
+        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, transform.localEulerAngles.z) + new Vector3(theta, 0, 0);
+
+        
     }
 
     private void OnTriggerStay(Collider other)
