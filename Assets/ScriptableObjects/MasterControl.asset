@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010fa88da7dddf445a2a0e85d598cebf, type: 3}
   m_Name: MasterControl
   m_EditorClassIdentifier: 
-  TouchControls: 0
+  TouchControls: 1
   Units:
   - {fileID: 11400000, guid: 2d776a77e581a8046af3ba3e29bbdb92, type: 2}
   - {fileID: 11400000, guid: 40adf161c3988674ebac2b343ad6f8cd, type: 2}

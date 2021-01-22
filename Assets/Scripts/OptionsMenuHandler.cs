@@ -11,6 +11,7 @@ public class OptionsMenuHandler : MonoBehaviour
     public GameObject OptionsPanelTouch;
     public GameObject OptionsPanelNonTouch;
     public GameObject CheatSheet;
+    public GameObject MobileControlsPage;
     public GameObject volumeSlider;
     public Slider VolumeConsoleSlider;
     public Slider VolumeTouchSlider;
@@ -69,6 +70,23 @@ public class OptionsMenuHandler : MonoBehaviour
         //    OptionsButton.SetActive(true);
         //}
         optionsOpen = OptionsPanel.activeSelf;
+    }
+    
+    public void ToggleMobileControlsPage()
+    {
+        MobileControlsPage.SetActive(!MobileControlsPage.activeSelf);
+
+        if (MobileControlsPage.activeSelf)
+        {
+            OptionsPanel.SetActive(false);
+            OptionsButton.SetActive(false);
+        }
+        else if (optionsOpen)
+        {
+            OptionsPanel.SetActive(true);
+            OptionsButton.SetActive(false);
+        }
+        else OptionsButton.SetActive(true);
     }
 
     public void ToggleCheatSheet()
