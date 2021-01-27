@@ -20,6 +20,9 @@ public class AICar : MonoBehaviour
     private Vector3 velocityPos;
     private float wheelAngle;
 
+    public Transform RearChecker, FrontChecker;
+    public LayerMask RoadMask;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,6 +74,24 @@ public class AICar : MonoBehaviour
         //car.Move(90 / angle, 0, 0, 0, 0);
         //Debug.Log(waypointIndex); still a problem (runtime error)
         direction = transform.forward;
+
+        CheckForGround();
+    }
+    //sets angle of AICars relative to ground
+    void CheckForGround()
+    {
+        float rearHeight = float.PositiveInfinity;
+        float frontHeight = float.PositiveInfinity;
+
+        RaycastHit rearHit;
+        RaycastHit frontHit;
+
+        if (Physics.Raycast(RearChecker.position, -transform.up, out rearHit, float.PositiveInfinity, RoadMask)) rearHeight = rearHit.distance;
+        if (Physics.Raycast(FrontChecker.position, -transform.up, out frontHit, float.PositiveInfinity, RoadMask)) frontHeight = frontHit.distance;
+        float z = Vector3.Distance(RearChecker.position, FrontChecker.position);
+        float theta = Mathf.Atan(Mathf.Abs(rearHeight - frontHeight) / z) * 180 / 3.14f;
+        if (rearHit.point.y < frontHit.point.y) theta *= -1;
+        transform.localEulerAngles = new Vector3(theta, transform.localEulerAngles.y, transform.localEulerAngles.z);
     }
 
     private void OnTriggerStay(Collider other)

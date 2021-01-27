@@ -14,6 +14,7 @@ public class Credits : MonoBehaviour
     void Start()
     {
         creditsStart = Time.time;
+        ScrollSpeed *= Screen.height / 1000f;
     }
 
     // Update is called once per frame
