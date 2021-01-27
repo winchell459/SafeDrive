@@ -83,7 +83,7 @@ public class AICar : MonoBehaviour
         //Debug.Log(waypointIndex); still a problem (runtime error)
         direction = transform.forward;
 
-        //CheckForGround();
+        CheckForGround();
     }
 
     
@@ -107,20 +107,22 @@ public class AICar : MonoBehaviour
 
         float z = Vector3.Distance(RearCheck.position, FrontCheck.position);
 
+        float theta = Mathf.Atan(Mathf.Abs(rearHeight - frontHeight) / z) * 180f / 3.14f;
+        if (hit1.point.y > hit2.point.y)
+        {
+            //transform.localEulerAngles = transform.localEulerAngles + new Vector3(-RotateRate, 0, 0);
+            Debug.Log("down hill");
+        }
+        else if (hit1.point.y < hit2.point.y)
+        {
+            //transform.localEulerAngles = transform.localEulerAngles + new Vector3(RotateRate, 0, 0);
+            theta *= -1;
+            Debug.Log("up hill");
+        }
+
         
-        //if (rearHeight > frontHeight)
-        //{
-        //    //transform.localEulerAngles = transform.localEulerAngles + new Vector3(-RotateRate, 0, 0);
-
-        //}
-        //else if (rearHeight < frontHeight)
-        //{
-        //    //transform.localEulerAngles = transform.localEulerAngles + new Vector3(RotateRate, 0, 0);
-        //}
-
-        float theta = -Mathf.Atan(Mathf.Abs(rearHeight - frontHeight)) * 180 / 3.14f;
-        print(frontHeight + " " + rearHeight + " -> " + theta + " " + transform.localEulerAngles.x);
-        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, transform.localEulerAngles.z) + new Vector3(theta, 0, 0);
+        print(frontHeight + " " + rearHeight + " -> " + theta + " " + transform.localEulerAngles.x + " " + z);
+        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, transform.localEulerAngles.z) + new Vector3(theta, 0, 0);
 
         
     }
